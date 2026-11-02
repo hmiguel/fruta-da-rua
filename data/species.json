@@ -1,0 +1,946 @@
+[
+ {
+  "id": "orange",
+  "match": [
+   "citrus sinensis"
+  ],
+  "tier": "eat",
+  "name_pt": "Laranja",
+  "name_en": "Orange",
+  "ripe": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "peak": [
+   2
+  ],
+  "color": "#e8892b",
+  "note_pt": "Doce, para comer ou sumo.",
+  "note_en": "Sweet, for eating or juice.",
+  "tree_pt": [
+   "laranjeira",
+   "laranjeiras"
+  ],
+  "tree_en": [
+   "orange tree",
+   "orange trees"
+  ]
+ },
+ {
+  "id": "mandarin",
+  "match": [
+   "citrus reticulata"
+  ],
+  "tier": "eat",
+  "name_pt": "Tangerina",
+  "name_en": "Mandarin",
+  "ripe": [
+   11,
+   12,
+   1,
+   2
+  ],
+  "peak": [
+   12,
+   1
+  ],
+  "color": "#ef9a3c",
+  "note_pt": "Doce e fácil de descascar.",
+  "note_en": "Sweet and easy to peel.",
+  "tree_pt": [
+   "tangerineira",
+   "tangerineiras"
+  ],
+  "tree_en": [
+   "mandarin tree",
+   "mandarin trees"
+  ]
+ },
+ {
+  "id": "citrus",
+  "match": [
+   "citrus sp"
+  ],
+  "tier": "eat",
+  "name_pt": "Citrinos",
+  "name_en": "Citrus",
+  "ripe": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "peak": [
+   2
+  ],
+  "color": "#e9b43a",
+  "note_pt": "Citrino de espécie não identificada. Prove antes.",
+  "note_en": "Unidentified citrus. Taste first.",
+  "tree_pt": [
+   "citrino",
+   "citrinos"
+  ],
+  "tree_en": [
+   "citrus tree",
+   "citrus trees"
+  ]
+ },
+ {
+  "id": "bitter_orange",
+  "match": [
+   "citrus x aurantium",
+   "citrus aurantium"
+  ],
+  "tier": "prep",
+  "name_pt": "Laranja-amarga",
+  "name_en": "Bitter orange",
+  "ripe": [
+   1,
+   2,
+   3
+  ],
+  "peak": [
+   2
+  ],
+  "color": "#d9792a",
+  "note_pt": "Muito amarga crua, mas ótima para compota (marmelada inglesa).",
+  "note_en": "Very bitter raw, but great for marmalade.",
+  "tree_pt": [
+   "laranjeira-amarga",
+   "laranjeiras-amargas"
+  ],
+  "tree_en": [
+   "bitter orange tree",
+   "bitter orange trees"
+  ]
+ },
+ {
+  "id": "lemon",
+  "match": [
+   "citrus limon"
+  ],
+  "tier": "prep",
+  "name_pt": "Limão",
+  "name_en": "Lemon",
+  "ripe": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "peak": [
+   1,
+   2,
+   3
+  ],
+  "color": "#e8c83a",
+  "note_pt": "Para cozinhar, sumos e temperos.",
+  "note_en": "For cooking, drinks and seasoning.",
+  "tree_pt": [
+   "limoeiro",
+   "limoeiros"
+  ],
+  "tree_en": [
+   "lemon tree",
+   "lemon trees"
+  ]
+ },
+ {
+  "id": "loquat",
+  "match": [
+   "eriobotrya"
+  ],
+  "tier": "eat",
+  "name_pt": "Nêspera",
+  "name_en": "Loquat",
+  "ripe": [
+   4,
+   5,
+   6
+  ],
+  "peak": [
+   5
+  ],
+  "color": "#e9a23b",
+  "note_pt": "Coma quando estiver laranja e macia.",
+  "note_en": "Eat when orange and soft.",
+  "tree_pt": [
+   "nespereira",
+   "nespereiras"
+  ],
+  "tree_en": [
+   "loquat tree",
+   "loquat trees"
+  ]
+ },
+ {
+  "id": "fig",
+  "match": [
+   "ficus carica"
+  ],
+  "tier": "eat",
+  "name_pt": "Figo",
+  "name_en": "Fig",
+  "ripe": [
+   6,
+   7,
+   8,
+   9
+  ],
+  "peak": [
+   7,
+   8
+  ],
+  "color": "#6a3f7f",
+  "note_pt": "Pronto quando cai do pé com um toque.",
+  "note_en": "Ready when it drops with a gentle touch.",
+  "tree_pt": [
+   "figueira",
+   "figueiras"
+  ],
+  "tree_en": [
+   "fig tree",
+   "fig trees"
+  ]
+ },
+ {
+  "id": "mulberry",
+  "match": [
+   "morus"
+  ],
+  "tier": "eat",
+  "name_pt": "Amora",
+  "name_en": "Mulberry",
+  "ripe": [
+   5,
+   6,
+   7
+  ],
+  "peak": [
+   6
+  ],
+  "color": "#4b2a4f",
+  "note_pt": "Mancha muito, cuidado com a roupa.",
+  "note_en": "Stains a lot, so mind your clothes.",
+  "tree_pt": [
+   "amoreira",
+   "amoreiras"
+  ],
+  "tree_en": [
+   "mulberry tree",
+   "mulberry trees"
+  ]
+ },
+ {
+  "id": "pomegranate",
+  "match": [
+   "punica granatum"
+  ],
+  "tier": "eat",
+  "name_pt": "Romã",
+  "name_en": "Pomegranate",
+  "ripe": [
+   9,
+   10,
+   11
+  ],
+  "peak": [
+   10
+  ],
+  "color": "#c23b3b",
+  "note_pt": "Pronta quando a casca começa a rachar.",
+  "note_en": "Ready when the skin starts to crack.",
+  "tree_pt": [
+   "romãzeira",
+   "romãzeiras"
+  ],
+  "tree_en": [
+   "pomegranate tree",
+   "pomegranate trees"
+  ]
+ },
+ {
+  "id": "plum",
+  "match": [
+   "prunus domestica",
+   "prunus spinosa"
+  ],
+  "tier": "eat",
+  "name_pt": "Ameixa",
+  "name_en": "Plum",
+  "ripe": [
+   6,
+   7,
+   8
+  ],
+  "peak": [
+   7
+  ],
+  "color": "#6d3b6e",
+  "note_pt": "Macia ao toque quando madura.",
+  "note_en": "Soft to the touch when ripe.",
+  "tree_pt": [
+   "ameixeira",
+   "ameixeiras"
+  ],
+  "tree_en": [
+   "plum tree",
+   "plum trees"
+  ]
+ },
+ {
+  "id": "apricot",
+  "match": [
+   "prunus armeniaca"
+  ],
+  "tier": "eat",
+  "name_pt": "Damasco",
+  "name_en": "Apricot",
+  "ripe": [
+   6,
+   7
+  ],
+  "peak": [
+   6,
+   7
+  ],
+  "color": "#eea25a",
+  "note_pt": "A época é curta, fique atento.",
+  "note_en": "Short season, so watch for it.",
+  "tree_pt": [
+   "damasqueiro",
+   "damasqueiros"
+  ],
+  "tree_en": [
+   "apricot tree",
+   "apricot trees"
+  ]
+ },
+ {
+  "id": "peach",
+  "match": [
+   "prunus persica"
+  ],
+  "tier": "eat",
+  "name_pt": "Pêssego",
+  "name_en": "Peach",
+  "ripe": [
+   6,
+   7,
+   8,
+   9
+  ],
+  "peak": [
+   7,
+   8
+  ],
+  "color": "#f0a07a",
+  "note_pt": "Cheiroso e macio quando maduro.",
+  "note_en": "Fragrant and soft when ripe.",
+  "tree_pt": [
+   "pessegueiro",
+   "pessegueiros"
+  ],
+  "tree_en": [
+   "peach tree",
+   "peach trees"
+  ]
+ },
+ {
+  "id": "cherry",
+  "match": [
+   "prunus avium",
+   "prunus cerasus"
+  ],
+  "tier": "eat",
+  "name_pt": "Cereja",
+  "name_en": "Cherry",
+  "ripe": [
+   5,
+   6
+  ],
+  "peak": [
+   5,
+   6
+  ],
+  "color": "#b8283a",
+  "note_pt": "Os pássaros chegam primeiro, vá cedo.",
+  "note_en": "Birds get there first, so go early.",
+  "tree_pt": [
+   "cerejeira",
+   "cerejeiras"
+  ],
+  "tree_en": [
+   "cherry tree",
+   "cherry trees"
+  ]
+ },
+ {
+  "id": "almond",
+  "match": [
+   "prunus dulcis",
+   "prunus amigdalus",
+   "prunus amygdalus"
+  ],
+  "tier": "eat",
+  "name_pt": "Amêndoa",
+  "name_en": "Almond",
+  "ripe": [
+   8,
+   9
+  ],
+  "peak": [
+   8,
+   9
+  ],
+  "color": "#b88a5a",
+  "note_pt": "Colha quando a casca verde abre e seca.",
+  "note_en": "Pick when the green hull splits and dries.",
+  "tree_pt": [
+   "amendoeira",
+   "amendoeiras"
+  ],
+  "tree_en": [
+   "almond tree",
+   "almond trees"
+  ]
+ },
+ {
+  "id": "apple",
+  "match": [
+   "malus"
+  ],
+  "tier": "eat",
+  "name_pt": "Maçã",
+  "name_en": "Apple",
+  "ripe": [
+   8,
+   9,
+   10
+  ],
+  "peak": [
+   9
+  ],
+  "color": "#c9483e",
+  "note_pt": "Árvores de jardim, com frutos pequenos.",
+  "note_en": "Garden trees with small fruit.",
+  "tree_pt": [
+   "macieira",
+   "macieiras"
+  ],
+  "tree_en": [
+   "apple tree",
+   "apple trees"
+  ]
+ },
+ {
+  "id": "pear",
+  "match": [
+   "pyrus communis"
+  ],
+  "tier": "eat",
+  "name_pt": "Pera",
+  "name_en": "Pear",
+  "ripe": [
+   7,
+   8,
+   9
+  ],
+  "peak": [
+   8
+  ],
+  "color": "#b8b84a",
+  "note_pt": "Amadurece melhor fora da árvore.",
+  "note_en": "Ripens best off the tree.",
+  "tree_pt": [
+   "pereira",
+   "pereiras"
+  ],
+  "tree_en": [
+   "pear tree",
+   "pear trees"
+  ]
+ },
+ {
+  "id": "quince",
+  "match": [
+   "cydonia oblonga"
+  ],
+  "tier": "eat",
+  "name_pt": "Marmelo",
+  "name_en": "Quince",
+  "ripe": [
+   9,
+   10
+  ],
+  "peak": [
+   9,
+   10
+  ],
+  "color": "#d8c04a",
+  "note_pt": "Dura crua, ideal para marmelada.",
+  "note_en": "Hard raw, ideal for quince paste.",
+  "tree_pt": [
+   "marmeleiro",
+   "marmeleiros"
+  ],
+  "tree_en": [
+   "quince tree",
+   "quince trees"
+  ]
+ },
+ {
+  "id": "persimmon",
+  "match": [
+   "diospyros kaki"
+  ],
+  "tier": "eat",
+  "name_pt": "Dióspiro",
+  "name_en": "Persimmon",
+  "ripe": [
+   10,
+   11,
+   12
+  ],
+  "peak": [
+   11
+  ],
+  "color": "#e36a2a",
+  "note_pt": "Espere que fique muito mole.",
+  "note_en": "Wait until very soft.",
+  "tree_pt": [
+   "diospireiro",
+   "diospireiros"
+  ],
+  "tree_en": [
+   "persimmon tree",
+   "persimmon trees"
+  ]
+ },
+ {
+  "id": "avocado",
+  "match": [
+   "persea americana"
+  ],
+  "tier": "eat",
+  "name_pt": "Abacate",
+  "name_en": "Avocado",
+  "ripe": [
+   11,
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "peak": [
+   1,
+   2
+  ],
+  "color": "#4f6b2e",
+  "note_pt": "Amadurece em casa, depois de colhido.",
+  "note_en": "Ripens at home after picking.",
+  "tree_pt": [
+   "abacateiro",
+   "abacateiros"
+  ],
+  "tree_en": [
+   "avocado tree",
+   "avocado trees"
+  ]
+ },
+ {
+  "id": "strawberry_tree",
+  "match": [
+   "arbutus unedo"
+  ],
+  "tier": "eat",
+  "name_pt": "Medronho",
+  "name_en": "Strawberry tree",
+  "ripe": [
+   10,
+   11,
+   12
+  ],
+  "peak": [
+   11
+  ],
+  "color": "#d8442f",
+  "note_pt": "Vermelho-escuro = maduro. Não abuse, fermenta.",
+  "note_en": "Deep red = ripe. Don't overdo it, it ferments.",
+  "tree_pt": [
+   "medronheiro",
+   "medronheiros"
+  ],
+  "tree_en": [
+   "strawberry tree",
+   "strawberry trees"
+  ]
+ },
+ {
+  "id": "feijoa",
+  "match": [
+   "acca sellowiana",
+   "feijoa"
+  ],
+  "tier": "eat",
+  "name_pt": "Feijoa",
+  "name_en": "Feijoa",
+  "ripe": [
+   10,
+   11,
+   12
+  ],
+  "peak": [
+   11
+  ],
+  "color": "#6f8f4a",
+  "note_pt": "Apanhe as que caem ao chão.",
+  "note_en": "Gather the ones that drop.",
+  "tree_pt": [
+   "feijoa",
+   "feijoas"
+  ],
+  "tree_en": [
+   "feijoa tree",
+   "feijoa trees"
+  ]
+ },
+ {
+  "id": "guava",
+  "match": [
+   "psidium guajava"
+  ],
+  "tier": "eat",
+  "name_pt": "Goiaba",
+  "name_en": "Guava",
+  "ripe": [
+   9,
+   10,
+   11
+  ],
+  "peak": [
+   10
+  ],
+  "color": "#a9c25a",
+  "note_pt": "Muito perfumada quando madura.",
+  "note_en": "Very fragrant when ripe.",
+  "tree_pt": [
+   "goiabeira",
+   "goiabeiras"
+  ],
+  "tree_en": [
+   "guava tree",
+   "guava trees"
+  ]
+ },
+ {
+  "id": "cherimoya",
+  "match": [
+   "annona"
+  ],
+  "tier": "eat",
+  "name_pt": "Anona",
+  "name_en": "Cherimoya",
+  "ripe": [
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "peak": [
+   1
+  ],
+  "color": "#86ad57",
+  "note_pt": "Amadurece em casa até ficar mole.",
+  "note_en": "Ripens at home until soft.",
+  "tree_pt": [
+   "anoneira",
+   "anoneiras"
+  ],
+  "tree_en": [
+   "cherimoya tree",
+   "cherimoya trees"
+  ]
+ },
+ {
+  "id": "mango",
+  "match": [
+   "mangifera indica"
+  ],
+  "tier": "eat",
+  "name_pt": "Manga",
+  "name_en": "Mango",
+  "ripe": [
+   8,
+   9,
+   10
+  ],
+  "peak": [
+   9
+  ],
+  "color": "#e9a33a",
+  "note_pt": "Raridade em Lisboa.",
+  "note_en": "A rarity in Lisbon.",
+  "tree_pt": [
+   "mangueira",
+   "mangueiras"
+  ],
+  "tree_en": [
+   "mango tree",
+   "mango trees"
+  ]
+ },
+ {
+  "id": "grape",
+  "match": [
+   "vitis vinifera"
+  ],
+  "tier": "eat",
+  "name_pt": "Uva",
+  "name_en": "Grape",
+  "ripe": [
+   8,
+   9
+  ],
+  "peak": [
+   8,
+   9
+  ],
+  "color": "#5a3f80",
+  "note_pt": "Prove um bago antes de colher o cacho.",
+  "note_en": "Taste one before picking the bunch.",
+  "tree_pt": [
+   "videira",
+   "videiras"
+  ],
+  "tree_en": [
+   "grapevine",
+   "grapevines"
+  ]
+ },
+ {
+  "id": "walnut",
+  "match": [
+   "juglans"
+  ],
+  "tier": "eat",
+  "name_pt": "Noz",
+  "name_en": "Walnut",
+  "ripe": [
+   9,
+   10
+  ],
+  "peak": [
+   9,
+   10
+  ],
+  "color": "#9c7448",
+  "note_pt": "Apanhe do chão; a casca verde mancha.",
+  "note_en": "Gather from the ground; the green hull stains.",
+  "tree_pt": [
+   "nogueira",
+   "nogueiras"
+  ],
+  "tree_en": [
+   "walnut tree",
+   "walnut trees"
+  ]
+ },
+ {
+  "id": "chestnut",
+  "match": [
+   "castanea sativa"
+  ],
+  "tier": "eat",
+  "name_pt": "Castanha",
+  "name_en": "Chestnut",
+  "ripe": [
+   10,
+   11
+  ],
+  "peak": [
+   10,
+   11
+  ],
+  "color": "#7a4a2a",
+  "note_pt": "Cuidado com os ouriços. Coma assada.",
+  "note_en": "Mind the spiky husks. Eat roasted.",
+  "tree_pt": [
+   "castanheiro",
+   "castanheiros"
+  ],
+  "tree_en": [
+   "chestnut tree",
+   "chestnut trees"
+  ]
+ },
+ {
+  "id": "hazelnut",
+  "match": [
+   "corylus avellana"
+  ],
+  "tier": "eat",
+  "name_pt": "Avelã",
+  "name_en": "Hazelnut",
+  "ripe": [
+   8,
+   9
+  ],
+  "peak": [
+   8,
+   9
+  ],
+  "color": "#a8763f",
+  "note_pt": "Pronta quando cai do invólucro.",
+  "note_en": "Ready when it drops from the husk.",
+  "tree_pt": [
+   "aveleira",
+   "aveleiras"
+  ],
+  "tree_en": [
+   "hazel tree",
+   "hazel trees"
+  ]
+ },
+ {
+  "id": "olive",
+  "match": [
+   "olea"
+  ],
+  "tier": "prep",
+  "name_pt": "Azeitona",
+  "name_en": "Olive",
+  "ripe": [
+   10,
+   11,
+   12,
+   1
+  ],
+  "peak": [
+   11,
+   12
+  ],
+  "color": "#5f6b2f",
+  "note_pt": "Não se come crua, precisa de cura (água e sal). Apanhe só à mão: varejar é proibido em Lisboa.",
+  "note_en": "Inedible raw, it needs curing (water and salt). Pick by hand only: beating branches is forbidden in Lisbon.",
+  "tree_pt": [
+   "oliveira",
+   "oliveiras"
+  ],
+  "tree_en": [
+   "olive tree",
+   "olive trees"
+  ]
+ },
+ {
+  "id": "carob",
+  "match": [
+   "ceratonia siliqua"
+  ],
+  "tier": "prep",
+  "name_pt": "Alfarroba",
+  "name_en": "Carob",
+  "ripe": [
+   8,
+   9,
+   10
+  ],
+  "peak": [
+   9
+  ],
+  "color": "#5a3a22",
+  "note_pt": "Vagens secas e escuras; faz-se farinha.",
+  "note_en": "Dry dark pods; ground into flour.",
+  "tree_pt": [
+   "alfarrobeira",
+   "alfarrobeiras"
+  ],
+  "tree_en": [
+   "carob tree",
+   "carob trees"
+  ]
+ },
+ {
+  "id": "date",
+  "match": [
+   "phoenix dactylifera"
+  ],
+  "tier": "prep",
+  "name_pt": "Tâmara",
+  "name_en": "Date",
+  "ripe": [
+   9,
+   10,
+   11
+  ],
+  "peak": [
+   10
+  ],
+  "color": "#9a5a2a",
+  "note_pt": "Nem sempre amadurece bem em Lisboa.",
+  "note_en": "Doesn't always ripen well in Lisbon.",
+  "tree_pt": [
+   "tamareira",
+   "tamareiras"
+  ],
+  "tree_en": [
+   "date palm",
+   "date palms"
+  ]
+ },
+ {
+  "id": "x_excluded",
+  "match": [
+   "celtis",
+   "pyrus calleryana",
+   "pyrus sp",
+   "prunus cerasifera",
+   "prunus serrulata",
+   "prunus laurocerasus",
+   "prunus lusitanica",
+   "prunus avium plena",
+   "prunus sp",
+   "phoenix canariensis",
+   "phoenix reclinata",
+   "phoenix sylvestris",
+   "phoenix sp",
+   "morus alba var. fruitless",
+   "corylus colurna",
+   "nerium",
+   "taxus",
+   "phytolacca",
+   "persea indica",
+   "pinus pinea"
+  ],
+  "tier": "excluded",
+  "name_pt": "",
+  "name_en": "",
+  "ripe": [],
+  "peak": [],
+  "color": "#9ca3af",
+  "note_pt": "",
+  "note_en": "",
+  "tree_pt": [
+   "",
+   ""
+  ],
+  "tree_en": [
+   "",
+   ""
+  ]
+ }
+]

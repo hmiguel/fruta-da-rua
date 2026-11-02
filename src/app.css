@@ -1,0 +1,58 @@
+:root {
+	/* field notebook: herbarium paper, iron-gall ink, graphite, kraft specimen tags */
+	--paper: #eef0e4;
+	--sheet: #f7f8f0;
+	--ink: #3a3226;
+	--pencil: #6e695a;
+	--rule: #d6d7c6;
+	--wash: #d3e3c1;
+	--tag: #e6dcc2;
+	--font-hand: 'Kalam', 'Comic Sans MS', cursive;
+	--font-text: 'Spectral', Georgia, serif;
+	--radius: 10px;
+	color-scheme: light;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	height: 100%;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--font-text);
+	font-size: 16px;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+
+button {
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
+}
+
+:focus-visible {
+	outline: 2px dashed var(--ink);
+	outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		transition: none !important;
+		animation: none !important;
+	}
+}
+
+/* Read by screen readers, not shown. */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}

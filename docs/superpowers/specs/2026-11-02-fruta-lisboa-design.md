@@ -27,6 +27,7 @@ Recon findings that shape the design:
 ## Anti-goals (would be failure even if it works)
 - Sending people into private property, or encouraging stripping trees/damaging branches. Every tree needs an etiquette note, and community-added trees get a required "on public ground?" checkbox.
 - Showing toxic or non-edible species as "fruit to collect" (oleander, yew, ornamental pear, etc.).
+- Showing fruit whose collection is restricted by law (e.g. stone-pine cones, DL 77/2015: forbidden Apr–Nov), or encouraging acts Lisbon's Regulamento Municipal do Arvoredo art. 9.º forbids (climbing, beating branches — *trepar e varejar*).
 - A map that looks authoritative but is wrong. Season is an estimate and must say so, and fresh community reports override the calendar.
 
 ## How it's built (my calls; user approved the stack)
