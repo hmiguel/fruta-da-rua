@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { i18n, t } from '../i18n/index.svelte.ts';
 	import { calendarPath } from '../site.ts';
+	import { trapTab } from './trap.ts';
 
 	let { onClose }: { onClose: () => void } = $props();
 	let generatedAt: string | null = $state(null);
@@ -13,20 +14,9 @@
 			: null
 	);
 
-	/** Keep Tab inside the dialog while it is open. */
-	function trap(e: KeyboardEvent) {
+	function onKey(e: KeyboardEvent) {
 		if (e.key === 'Escape') return onClose();
-		if (e.key !== 'Tab') return;
-		const items = [...dialog.querySelectorAll<HTMLElement>('a[href], button')];
-		const first = items[0];
-		const last = items[items.length - 1];
-		if (e.shiftKey && (document.activeElement === first || document.activeElement === dialog)) {
-			e.preventDefault();
-			last.focus();
-		} else if (!e.shiftKey && document.activeElement === last) {
-			e.preventDefault();
-			first.focus();
-		}
+		trapTab(e, dialog);
 	}
 
 	onMount(() => {
@@ -36,11 +26,11 @@
 			.then((r) => r.json())
 			.then((m) => (generatedAt = m.generated_at))
 			.catch(() => {});
-		return () => opener?.focus?.();
+		return () => (opener?.isConnected ? opener : document.getElementById('menu-button'))?.focus();
 	});
 </script>
 
-<svelte:window onkeydown={trap} />
+<svelte:window onkeydown={onKey} />
 
 <div class="scrim" role="presentation" onclick={onClose}></div>
 <div class="about" role="dialog" aria-modal="true" aria-labelledby="about-title" data-testid="about" tabindex="-1" bind:this={dialog}>

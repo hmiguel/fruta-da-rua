@@ -4,7 +4,7 @@
 	import { calendarPath, homePath } from '../site.ts';
 </script>
 
-<a class="skip" href="#main">{t('nav.skip')}</a>
+<a class="skip" href="#main">{t('nav.skip_content')}</a>
 <header>
 	<a class="brand" href={homePath(i18n.lang)}>{t('app.title')}</a>
 	<nav aria-label={t('app.title')}>

@@ -5,11 +5,12 @@
 	import { LISBON_BBOX, inBBox, type BBox } from '../geo.ts';
 	import { t } from '../i18n/index.svelte.ts';
 	import { app } from '../state.svelte.ts';
-	import { matchesFilter, type EnrichedFC } from './enrich.ts';
+	import { matchesFilter, type Filters } from '../filters.ts';
+	import type { EnrichedFC } from './enrich.ts';
 	import { keepLayer, naturePaint } from './nature-style.ts';
 	import { SPECIES } from '../species.ts';
 
-	let { trees, onBounds }: { trees: EnrichedFC; onBounds: (b: BBox) => void } = $props();
+	let { trees, filters, onBounds }: { trees: EnrichedFC; filters: Filters; onBounds: (b: BBox) => void } = $props();
 
 	let container: HTMLDivElement;
 	let map: MapLibreMap | undefined = $state();
@@ -18,12 +19,11 @@
 	const [w, s, e, n] = LISBON_BBOX;
 	const PAD = 0.15;
 
-	/** Keep Lisbon clear of the top bar and the season panel (bottom sheet on phones, sidebar on desktop). */
+	/** Keep Lisbon clear of the search bar with its chips and of the bottom panel. */
 	function framePadding() {
-		const wide = window.innerWidth >= 768;
-		return wide
-			? { top: 80, bottom: 20, left: 410, right: 20 }
-			: { top: 110, bottom: Math.round(window.innerHeight * 0.4) + 10, left: 10, right: 10 };
+		return window.innerWidth >= 768
+			? { top: 130, bottom: 110, left: 20, right: 20 }
+			: { top: 130, bottom: 90, left: 10, right: 10 };
 	}
 
 	const INK = '#3a3226';
@@ -76,14 +76,16 @@
 					compact: true,
 					customAttribution: '© Câmara Municipal de Lisboa (CC0) · OpenFreeMap © OpenStreetMap'
 				}),
-				'bottom-right'
+				'bottom-left'
 			);
+			// Compact credits start open and cover the map on phones; fold them behind the (i).
+			m.getContainer().querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
 			const geolocate = new maplibregl.GeolocateControl({
 				positionOptions: { enableHighAccuracy: true },
 				trackUserLocation: true,
 				fitBoundsOptions: { maxZoom: 16 }
 			});
-			m.addControl(geolocate, 'top-right');
+			m.addControl(geolocate, 'bottom-right');
 
 			m.on('load', async () => {
 				await addFruitImages(m);
@@ -184,8 +186,8 @@
 
 	$effect(() => {
 		if (!map || !loaded) return;
-		const { onlyPickable, selectedSpecies } = app;
-		const features = trees.features.filter((f) => matchesFilter(f.properties, onlyPickable, selectedSpecies));
+		const f = filters;
+		const features = trees.features.filter((t) => matchesFilter(t.properties, f));
 		(map.getSource('trees') as GeoJSONSource).setData({ type: 'FeatureCollection', features });
 	});
 
@@ -202,8 +204,31 @@
 		position: absolute;
 		inset: 0;
 	}
-	.map :global(.maplibregl-ctrl-top-right) {
-		top: 104px;
+	/* The location button and credits sit just above the bottom panel. */
+	.map :global(.maplibregl-ctrl-bottom-right),
+	.map :global(.maplibregl-ctrl-bottom-left) {
+		bottom: calc(var(--panel-h, 70px) + 6px);
+	}
+	@media (min-width: 768px) {
+		.map :global(.maplibregl-ctrl-bottom-left) {
+			bottom: 0;
+			left: 410px;
+		}
+		.map :global(.maplibregl-ctrl-bottom-right) {
+			bottom: 0;
+		}
+	}
+	.map :global(.maplibregl-ctrl-geolocate) {
+		width: 52px;
+		height: 52px;
+	}
+	.map :global(.maplibregl-ctrl-bottom-right .maplibregl-ctrl-group) {
+		margin: 0 12px 12px 0;
+		border: 1.5px solid var(--ink);
+		border-radius: 50%;
+		overflow: hidden;
+		background: var(--sheet);
+		box-shadow: 0 3px 10px rgb(58 50 38 / 0.18);
 	}
 	/* Thumb-sized map controls on phones. */
 	.map :global(.maplibregl-ctrl-group button) {
@@ -214,6 +239,7 @@
 		width: 44px;
 		height: 44px;
 		background-position: center;
+		background-repeat: no-repeat;
 	}
 	.map :global(.maplibregl-ctrl-attrib.maplibregl-compact) {
 		min-height: 44px;

@@ -21,7 +21,7 @@ test('missing key returns the key', () => {
 });
 
 test('interpolates variables', () => {
-	expect(t('panel.soon', { n: 3 })).toContain('3');
+	expect(t('panel.nearby', { n: 3 })).toContain('3');
 });
 
 test('month names follow language', () => {

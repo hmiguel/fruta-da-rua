@@ -23,24 +23,33 @@ for (const path of ['/', '/en', '/fruta', '/fruta/nespera', '/en/fruit/fig']) {
 	});
 }
 
-test('axe: tree sheet and About dialog', async ({ page }) => {
+test('axe: tree sheet, menu, About and search', async ({ page }) => {
 	await page.goto('/?e2e=1');
-	await page.getByTestId('fruit-olive').click();
+	await page.getByTestId('chip-olive').click();
 	await page.evaluate(() => (window as unknown as { __openFirstTree: () => void }).__openFirstTree());
 	await expect(page.getByTestId('tree-sheet')).toBeFocused();
 	await noViolations(page, 'tree sheet');
+	await page.getByTestId('menu-open').click();
+	await noViolations(page, 'menu');
 	await page.getByTestId('about-open').click();
 	await noViolations(page, 'about');
+	await page.keyboard.press('Escape');
+	await page.getByTestId('chip-more').click();
+	await noViolations(page, 'search');
 });
 
-test('keyboard: skip link first, About traps focus and returns it, Escape closes only the top layer', async ({
+test('keyboard: skip link first, menu and About trap focus and return it, Escape closes only the top layer', async ({
 	page
 }) => {
 	await page.goto('/?e2e=1');
 	await page.keyboard.press('Tab');
-	await expect(page.getByRole('link', { name: 'Saltar para a lista de frutos' })).toBeFocused();
-	await page.getByTestId('fruit-olive').click();
+	await expect(page.getByRole('link', { name: 'Saltar para a pesquisa de frutos' })).toBeFocused();
+	await page.getByTestId('chip-olive').click();
 	await page.evaluate(() => (window as unknown as { __openFirstTree: () => void }).__openFirstTree());
+	await page.getByTestId('menu-open').focus();
+	await page.keyboard.press('Enter');
+	for (let i = 0; i < 8; i++) await page.keyboard.press('Tab');
+	expect(await page.getByTestId('menu').evaluate((d) => d.contains(document.activeElement))).toBe(true);
 	await page.getByTestId('about-open').focus();
 	await page.keyboard.press('Enter');
 	const about = page.getByTestId('about');
@@ -49,7 +58,7 @@ test('keyboard: skip link first, About traps focus and returns it, Escape closes
 	await page.keyboard.press('Escape');
 	await expect(about).toHaveCount(0);
 	await expect(page.getByTestId('tree-sheet')).toBeVisible();
-	await expect(page.getByTestId('about-open')).toBeFocused();
+	await expect(page.getByTestId('menu-open')).toBeFocused();
 });
 
 for (const width of [360, 390]) {

@@ -19,13 +19,3 @@ export function enrich(fc: FeatureCollection<Point, TreeProps>, now: Date): Enri
 	}
 	return { type: 'FeatureCollection', features };
 }
-
-export function matchesFilter(
-	props: { species: string; pickable: boolean },
-	onlyPickable: boolean,
-	speciesId: string | null
-): boolean {
-	// A chosen fruit shows all its trees, so "coming soon" fruits aren't an empty map.
-	if (speciesId) return props.species === speciesId;
-	return props.pickable || !onlyPickable;
-}

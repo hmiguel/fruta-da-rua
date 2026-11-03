@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import FruitArt from '../art/FruitArt.svelte';
+	import { filtersToQuery } from '../filters.ts';
 	import type { FruitStats } from '../fruit-stats.ts';
 	import { monthsSentence } from '../fruit-stats.ts';
 	import { i18n, speciesName, speciesNote, t, tn, treeName } from '../i18n/index.svelte.ts';
 	import { lisbonMonth } from '../season.ts';
-	import { EDIBLE, SITE_NAME, absoluteUrl, calendarPath, fruitPath, fruitSlug, homePath } from '../site.ts';
+	import { EDIBLE, SITE_NAME, absoluteUrl, calendarPath, fruitPath, homePath } from '../site.ts';
 	import { speciesById } from '../species.ts';
 	import MonthsBar from './MonthsBar.svelte';
 	import Seo from './Seo.svelte';
@@ -17,7 +18,7 @@
 	const sp = $derived(speciesById(speciesId)!);
 	const name = $derived(speciesName(sp));
 	const months = $derived(monthsSentence(sp.ripe, i18n.lang));
-	const mapHref = $derived(`${homePath(i18n.lang)}?fruta=${fruitSlug(sp, i18n.lang)}`);
+	const mapHref = $derived(homePath(i18n.lang) + filtersToQuery({ species: [sp.id], onlyPickable: false }, i18n.lang));
 	const others = $derived(EDIBLE.filter((s) => s.id !== sp.id));
 
 	// The current month is only known in the browser (pages are generated ahead of time).

@@ -5,7 +5,7 @@
 	import type { EnrichedProps } from '../map/enrich.ts';
 	import { speciesById } from '../species.ts';
 	import { onMount } from 'svelte';
-	import { app } from '../state.svelte.ts';
+	import { topLayer } from '../state.svelte.ts';
 	import MonthsBar from './MonthsBar.svelte';
 
 	let { tree, month, onClose }: { tree: Feature<Point, EnrichedProps>; month: number; onClose: () => void } = $props();
@@ -23,8 +23,8 @@
 	});
 
 	function onKey(e: KeyboardEvent) {
-		// The About dialog sits on top; let it take Escape first.
-		if (e.key === 'Escape' && !app.aboutOpen) onClose();
+		// A dialog on top takes Escape first.
+		if (e.key === 'Escape' && !topLayer()) onClose();
 	}
 </script>
 

@@ -19,6 +19,7 @@ test('service worker activates', async ({ page }) => {
 
 test('about dialog credits the data and shows its date', async ({ page }) => {
 	await page.goto('/');
+	await page.getByTestId('menu-open').click();
 	await page.getByTestId('about-open').click();
 	const about = page.getByTestId('about');
 	await expect(about).toContainText('CC0');
