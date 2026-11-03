@@ -170,3 +170,20 @@ test('fruit pages have the same menu as the map, with the language in settings',
 		'page'
 	);
 });
+
+test('menu fills the window; About and Etiquette are separate', async ({ page }) => {
+	await page.goto('/');
+	await page.getByTestId('menu-open').click();
+	const menu = page.getByTestId('menu');
+	const box = (await menu.boundingBox())!;
+	expect(box.width).toBeCloseTo(page.viewportSize()!.width, 0);
+	expect(box.height).toBeCloseTo(page.viewportSize()!.height, 0);
+	await expect(page.getByTestId('settings-open')).toHaveText('Definições');
+	await page.getByTestId('about-open').click();
+	await expect(page.getByTestId('about')).toContainText('CC0');
+	await expect(page.getByTestId('about')).not.toContainText('vareje');
+	await page.getByTestId('panel-back').click();
+	await page.getByTestId('etiquette-open').click();
+	await expect(page.getByTestId('etiquette')).toContainText('Regulamento Municipal do Arvoredo');
+	await expect(page.getByRole('heading', { level: 2 })).toHaveText('Boas maneiras');
+});

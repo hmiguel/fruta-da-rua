@@ -20,20 +20,17 @@
 <div class="about" data-testid="about">
 	<p>{t('about.body')}</p>
 
-	<h3>{t('about.etiquette_title')}</h3>
-	<p class="etiquette">{t('sheet.etiquette')}</p>
-	<p class="small">{t('about.rules')}</p>
+	<h3>{t('about.data_title')}</h3>
+	<p>
+		{t('about.source')}
+		{#if dataDate}<br /><span class="date">{t('about.data_date', { date: dataDate })}</span>{/if}
+	</p>
 
 	<h3>{t('about.related')}</h3>
 	<ul>
 		<li><a href="https://fallingfruit.org" target="_blank" rel="noopener">Falling Fruit</a></li>
 		<li>Muita Fruta (Cozinha Popular da Mouraria)</li>
 	</ul>
-
-	<p class="credit">
-		{t('about.credit')}
-		{#if dataDate}<br />{t('about.data_date', { date: dataDate })}{/if}
-	</p>
 </div>
 
 <style>
@@ -50,17 +47,8 @@
 		font-size: 1.15rem;
 		color: var(--pencil);
 	}
-	.etiquette {
-		padding: 2px 0 2px 14px;
-		border-left: 2px solid var(--ink);
-		font-family: var(--font-hand);
-		font-size: 1.05rem;
-		line-height: 1.4;
+	.date {
 		color: var(--pencil);
-	}
-	.small {
-		margin-top: 10px;
-		font-size: 0.9rem;
 	}
 	ul {
 		margin: 0;
@@ -71,10 +59,5 @@
 		align-items: center;
 		min-height: 44px;
 		color: var(--ink);
-	}
-	.credit {
-		margin-top: 20px;
-		font-size: 0.85rem;
-		color: var(--pencil);
 	}
 </style>

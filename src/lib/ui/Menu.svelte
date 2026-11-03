@@ -2,13 +2,14 @@
 	import { beforeNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import { onMount, tick } from 'svelte';
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import { version } from '../../../package.json';
 	import { filtersToQuery } from '../filters.ts';
 	import { i18n, t, type Lang } from '../i18n/index.svelte.ts';
 	import { SITE_NAME, calendarPath, homePath } from '../site.ts';
 	import { app } from '../state.svelte.ts';
 	import AboutContent from './AboutContent.svelte';
+	import EtiquetteContent from './EtiquetteContent.svelte';
 	import Icon, { type IconName } from './kit/Icon.svelte';
 	import PanelHead from './kit/PanelHead.svelte';
 	import { trapTab } from './trap.ts';
@@ -32,7 +33,7 @@
 
 	const here = (path: string) => (page.url.pathname === path ? 'page' : undefined);
 
-	type View = 'main' | 'about' | 'settings';
+	type View = 'main' | 'about' | 'etiquette' | 'settings';
 	let view = $state<View>('main');
 
 	/** Sub-views open in place; focus goes to their back button, and back to the row that opened them. */
@@ -61,14 +62,12 @@
 
 <svelte:window onkeydown={onKey} />
 
-{#snippet inside(icon: IconName, label: string, trail: string | null, more: boolean)}
+{#snippet inside(icon: IconName, label: string, more: boolean)}
 	<Icon name={icon} />
 	<span class="label">{label}</span>
-	{#if trail}<span class="trail">{trail}</span>{/if}
 	{#if more}<span class="more"><Icon name="forward" size={18} /></span>{/if}
 {/snippet}
 
-<div class="scrim" role="presentation" onclick={onClose} transition:fade={{ duration: still ? 0 : 200 }}></div>
 <div
 	class="drawer"
 	id="menu"
@@ -78,7 +77,7 @@
 	data-testid="menu"
 	tabindex="-1"
 	bind:this={drawer}
-	transition:fly={{ x: -300, opacity: 1, duration: still ? 0 : 220 }}
+	transition:fly={{ x: -48, opacity: 1, duration: still ? 0 : 200 }}
 	ontouchstart={(e) => (startX = e.touches[0].clientX)}
 	ontouchend={(e) => {
 		// Swipe left to close.
@@ -92,12 +91,12 @@
 			<ul>
 				<li>
 					<a class="row" href={homePath(i18n.lang)} aria-current={here(homePath(i18n.lang))}
-						>{@render inside('map', t('nav.map'), null, false)}</a
+						>{@render inside('map', t('nav.map'), false)}</a
 					>
 				</li>
 				<li>
 					<a class="row" href={calendarPath(i18n.lang)} aria-current={here(calendarPath(i18n.lang))}
-						>{@render inside('calendar', t('menu.calendar'), null, false)}</a
+						>{@render inside('calendar', t('menu.calendar'), false)}</a
 					>
 				</li>
 			</ul>
@@ -105,20 +104,24 @@
 			<ul>
 				<li>
 					<button class="row" data-view="about" data-testid="about-open" onclick={() => show('about')}
-						>{@render inside('info', t('menu.about'), null, true)}</button
+						>{@render inside('info', t('menu.about'), true)}</button
+					>
+				</li>
+				<li>
+					<button class="row" data-view="etiquette" data-testid="etiquette-open" onclick={() => show('etiquette')}
+						>{@render inside('leaf', t('menu.etiquette'), true)}</button
 					>
 				</li>
 				<li>
 					<button class="row" data-view="settings" data-testid="settings-open" onclick={() => show('settings')}
-						>{@render inside('settings', t('menu.settings'), LANGS.find((l) => l.id === i18n.lang)!.name, true)}</button
+						>{@render inside('settings', t('menu.settings'), true)}</button
 					>
 				</li>
 			</ul>
 			<hr />
 			<ul>
 				<li>
-					<a class="row" href={mail} data-testid="feedback">{@render inside('mail', t('menu.feedback'), null, false)}</a
-					>
+					<a class="row" href={mail} data-testid="feedback">{@render inside('mail', t('menu.feedback'), false)}</a>
 					<p class="hint">{t('menu.feedback_hint')}</p>
 				</li>
 			</ul>
@@ -126,6 +129,9 @@
 	{:else if view === 'about'}
 		<PanelHead id="menu-title" title={t('menu.about')} onBack={() => show('main')} {onClose} />
 		<AboutContent />
+	{:else if view === 'etiquette'}
+		<PanelHead id="menu-title" title={t('menu.etiquette')} onBack={() => show('main')} {onClose} />
+		<EtiquetteContent />
 	{:else}
 		<PanelHead id="menu-title" title={t('menu.settings')} onBack={() => show('main')} {onClose} />
 		<section aria-labelledby="lang-title">
@@ -152,26 +158,16 @@
 </div>
 
 <style>
-	.scrim {
-		position: fixed;
-		inset: 0;
-		z-index: 7;
-		background: rgb(58 50 38 / 0.35);
-	}
 	.drawer {
 		position: fixed;
 		z-index: 8;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		width: min(320px, 86vw);
+		inset: 0;
 		overflow-y: auto;
 		overscroll-behavior: contain;
-		padding: max(12px, env(safe-area-inset-top)) 0 max(14px, env(safe-area-inset-bottom));
+		/* The whole window; on wide screens the content keeps a readable column. */
+		padding: max(12px, env(safe-area-inset-top)) max(0px, calc((100% - 560px) / 2))
+			max(14px, env(safe-area-inset-bottom));
 		background: var(--sheet);
-		border-right: 1.5px solid var(--ink);
-		border-radius: 0 16px 14px 0;
-		box-shadow: 6px 0 20px rgb(58 50 38 / 0.2);
 	}
 	.drawer:focus {
 		outline: none;
@@ -205,11 +201,6 @@
 	}
 	.label {
 		flex: 1;
-	}
-	.trail {
-		font-family: var(--font-text);
-		font-size: 0.9rem;
-		color: var(--pencil);
 	}
 	.more {
 		display: grid;

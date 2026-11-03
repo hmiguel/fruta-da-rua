@@ -45,7 +45,6 @@
 	"sheet.parish": "Parish",
 	"locate": "Find my location",
 	"about.body": "A community map of Lisbon's fruit trees showing what's in season. Seasons are estimates for Lisbon's climate and every tree is different.",
-	"about.etiquette_title": "Etiquette",
 	"about.credit": "Data: Câmara Municipal de Lisboa, Dados Abertos (CC0).",
 	"about.data_date": "Data from {date}",
 	"about.related": "Sister projects",
@@ -68,7 +67,7 @@
 	"menu.calendar": "Fruit calendar",
 	"menu.feedback": "Send feedback",
 	"menu.feedback_subject": "Feedback on Fruta da Rua",
-	"menu.about": "About and etiquette",
+	"menu.about": "About",
 	"menu.version": "Version {v}",
 	"lang.toggle": "PT",
 	"nav.skip_content": "Skip to content",
@@ -76,5 +75,9 @@
 	"menu.back": "Back to menu",
 	"settings.language": "Language",
 	"panel.close": "Close",
-	"menu.feedback_hint": "Opens your email app"
+	"menu.feedback_hint": "Opens your email app",
+	"menu.etiquette": "Etiquette",
+	"about.data_title": "Data",
+	"etiquette.law_title": "What the law says",
+	"about.source": "Lisbon City Council, Open Data (CC0)."
 }

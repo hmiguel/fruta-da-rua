@@ -36,6 +36,9 @@ test('axe: tree sheet, menu, About and search', async ({ page }) => {
 	await page.getByTestId('panel-back').click();
 	await page.getByTestId('about-open').click();
 	await noViolations(page, 'about');
+	await page.getByTestId('panel-back').click();
+	await page.getByTestId('etiquette-open').click();
+	await noViolations(page, 'etiquette');
 	await page.keyboard.press('Escape');
 	await page.getByTestId('chip-more').click();
 	await noViolations(page, 'search');
