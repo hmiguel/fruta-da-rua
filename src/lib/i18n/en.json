@@ -89,5 +89,12 @@
 	"nearby.from_you": "Nearest to you",
 	"nearby.from_center": "Nearest to the middle of the map",
 	"nearby.more": "{n} more in this area. Zoom in to see others.",
-	"nearby.none": "No trees in this area."
+	"nearby.none": "No trees in this area.",
+	"menu.install": "Add to home screen",
+	"install.why": "You get an icon on your phone and it opens like an app, even offline.",
+	"install.ios_1": "In Safari, tap the Share button, the square with an arrow pointing up.",
+	"install.ios_2": "Choose \"Add to Home Screen\". If you can't see it, scroll the list down.",
+	"install.ios_3": "Tap \"Add\".",
+	"install.browser_1": "Open the browser menu, the three dots next to the address.",
+	"install.browser_2": "Choose \"Install app\" or \"Add to home screen\"."
 }

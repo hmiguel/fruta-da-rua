@@ -4,7 +4,9 @@
 	import '@fontsource/spectral/400.css';
 	import '@fontsource/spectral/400-italic.css';
 	import '@fontsource/spectral/600.css';
+	import { onMount } from 'svelte';
 	import { i18n, setLang } from '$lib/i18n/index.svelte.ts';
+	import { listenForInstall } from '$lib/install.svelte.ts';
 	import '../app.css';
 	import kalamBold from '@fontsource/kalam/files/kalam-latin-700-normal.woff2?url';
 	import kalam from '@fontsource/kalam/files/kalam-latin-400-normal.woff2?url';
@@ -16,6 +18,7 @@
 	// svelte-ignore state_referenced_locally
 	i18n.lang = data.lang;
 	$effect.pre(() => setLang(data.lang));
+	onMount(listenForInstall);
 </script>
 
 <svelte:head>

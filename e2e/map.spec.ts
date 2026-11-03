@@ -270,8 +270,41 @@ test('menu order: map and calendar, etiquette and settings, sponsor and feedback
 		'Calendário da fruta',
 		'Boas maneiras',
 		'Definições',
+		'Adicionar ao ecrã principal',
 		'Apoiar o projeto',
 		'Enviar sugestão',
 		'Sobre'
 	]);
+});
+
+test('add to home screen: steps on iPhone', async ({ browser }) => {
+	const ctx = await browser.newContext({
+		viewport: { width: 390, height: 844 },
+		userAgent:
+			'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1'
+	});
+	const page = await ctx.newPage();
+	await page.goto('/');
+	await page.getByTestId('menu-open').click();
+	await page.getByTestId('install-open').click();
+	await expect(page.getByTestId('panel-back')).toBeFocused();
+	await expect(page.getByTestId('install-steps')).toContainText('Partilhar');
+	await expect(page.getByTestId('install-steps').locator('li')).toHaveCount(3);
+	await ctx.close();
+});
+
+test("add to home screen: uses the browser's own install prompt when there is one", async ({ page }) => {
+	await page.goto('/');
+	await expect(page.getByTestId('chip-all')).toBeVisible();
+	await page.evaluate(() => {
+		const e = new Event('beforeinstallprompt', { cancelable: true }) as Event & Record<string, unknown>;
+		e.prompt = () => ((window as unknown as { __prompted: boolean }).__prompted = true) && Promise.resolve();
+		e.userChoice = Promise.resolve({ outcome: 'accepted' });
+		dispatchEvent(e);
+	});
+	await page.getByTestId('menu-open').click();
+	await page.getByTestId('install-open').click();
+	await expect.poll(() => page.evaluate(() => (window as unknown as { __prompted?: boolean }).__prompted)).toBe(true);
+	// Once installed, the entry goes away.
+	await expect(page.getByTestId('install-open')).toHaveCount(0);
 });

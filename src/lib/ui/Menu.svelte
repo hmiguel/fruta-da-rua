@@ -7,6 +7,7 @@
 	import { filtersToQuery } from '../filters.ts';
 	import { i18n, t, type Lang } from '../i18n/index.svelte.ts';
 	import { REPO_URL, SITE_NAME, SPONSOR_URL, homePath } from '../site.ts';
+	import { currentInstallHow, install } from '../install.svelte.ts';
 	import { app } from '../state.svelte.ts';
 	import AboutContent from './AboutContent.svelte';
 	import CalendarContent from './CalendarContent.svelte';
@@ -37,9 +38,21 @@
 	const versionNote = $derived(t('menu.version', { v: sha ? `${version} (${sha})` : version }));
 	const commitHref = __COMMIT__ ? `${REPO_URL}/commit/${__COMMIT__}` : null;
 
+	const how = $derived(currentInstallHow());
+
+	/** Chrome and Edge can install by themselves; elsewhere the steps are shown. */
+	async function addToHome() {
+		const p = install.prompt;
+		if (!p) return show('install');
+		await p.prompt();
+		const { outcome } = await p.userChoice;
+		install.prompt = null;
+		if (outcome === 'accepted') install.installed = true;
+	}
+
 	const here = (path: string) => (page.url.pathname === path ? 'page' : undefined);
 
-	type View = 'main' | 'calendar' | 'about' | 'etiquette' | 'settings';
+	type View = 'main' | 'calendar' | 'about' | 'etiquette' | 'settings' | 'install';
 	let view = $state<View>('main');
 
 	/** Sub-views open in place; focus goes to their back button, and back to the row that opened them. */
@@ -127,6 +140,13 @@
 						>{@render inside('settings', t('menu.settings'), true)}</button
 					>
 				</li>
+				{#if how !== 'installed'}
+					<li>
+						<button class="row" data-view="install" data-testid="install-open" onclick={addToHome}
+							>{@render inside('phone', t('menu.install'), how !== 'prompt')}</button
+						>
+					</li>
+				{/if}
 			</ul>
 			<hr />
 			<ul>
@@ -148,6 +168,21 @@
 	{:else if view === 'calendar'}
 		<PanelHead id="menu-title" title={t('menu.calendar')} onBack={() => show('main')} {onClose} />
 		<CalendarContent />
+	{:else if view === 'install'}
+		<PanelHead id="menu-title" title={t('menu.install')} onBack={() => show('main')} {onClose} />
+		<div class="steps" data-testid="install-steps">
+			<p>{t('install.why')}</p>
+			<ol>
+				{#if how === 'ios'}
+					<li>{t('install.ios_1')}</li>
+					<li>{t('install.ios_2')}</li>
+					<li>{t('install.ios_3')}</li>
+				{:else}
+					<li>{t('install.browser_1')}</li>
+					<li>{t('install.browser_2')}</li>
+				{/if}
+			</ol>
+		</div>
 	{:else if view === 'about'}
 		<PanelHead id="menu-title" title={t('menu.about')} onBack={() => show('main')} {onClose} />
 		<AboutContent />
@@ -236,6 +271,22 @@
 		margin: 8px 20px;
 		border: 0;
 		border-top: 1px solid var(--rule);
+	}
+	.steps {
+		padding: 0 20px;
+	}
+	.steps p {
+		margin: 0 0 12px;
+	}
+	ol {
+		margin: 0;
+		padding-left: 22px;
+		font-family: var(--font-hand);
+		font-size: 1.2rem;
+		line-height: 1.4;
+	}
+	ol li + li {
+		margin-top: 10px;
 	}
 	h3 {
 		margin: 4px 20px 6px;

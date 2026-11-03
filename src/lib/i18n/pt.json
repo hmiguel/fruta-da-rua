@@ -89,5 +89,12 @@
 	"nearby.from_you": "Mais perto de si",
 	"nearby.from_center": "Mais perto do centro do mapa",
 	"nearby.more": "Mais {n} nesta zona. Aproxime o mapa para ver outras.",
-	"nearby.none": "Sem árvores nesta zona."
+	"nearby.none": "Sem árvores nesta zona.",
+	"menu.install": "Adicionar ao ecrã principal",
+	"install.why": "Fica com um ícone no telemóvel e abre como uma app, também sem rede.",
+	"install.ios_1": "No Safari, toque no botão Partilhar, o quadrado com uma seta para cima.",
+	"install.ios_2": "Escolha «Adicionar ao ecrã principal». Se não aparecer, deslize a lista para baixo.",
+	"install.ios_3": "Toque em «Adicionar».",
+	"install.browser_1": "Abra o menu do browser, os três pontos ao lado do endereço.",
+	"install.browser_2": "Escolha «Instalar app» ou «Adicionar ao ecrã principal»."
 }

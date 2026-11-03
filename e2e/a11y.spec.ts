@@ -37,6 +37,9 @@ test('axe: tree sheet, menu, About and search', async ({ page }) => {
 	await page.getByTestId('calendar-open').click();
 	await noViolations(page, 'calendar in menu');
 	await page.getByTestId('panel-back').click();
+	await page.getByTestId('install-open').click();
+	await noViolations(page, 'install steps');
+	await page.getByTestId('panel-back').click();
 	await page.getByTestId('about-open').click();
 	await noViolations(page, 'about');
 	await page.getByTestId('panel-back').click();
