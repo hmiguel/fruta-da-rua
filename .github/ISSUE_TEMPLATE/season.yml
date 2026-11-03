@@ -1,0 +1,20 @@
+name: A season is off
+description: A fruit ripens earlier or later in Lisbon than the map says
+labels: [data]
+body:
+  - type: input
+    id: fruit
+    attributes:
+      label: Fruit
+    validations:
+      required: true
+  - type: input
+    id: months
+    attributes:
+      label: Months you see it ripe
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Where and anything else

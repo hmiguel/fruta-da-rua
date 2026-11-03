@@ -2,7 +2,7 @@
 
 ## Context
 
-The user wants a community social project: a map of fruit trees in Lisbon showing which ones can be picked **right now**, based on the season. It serves two kinds of people (user's answer: "Both"): someone out walking who opens it on their phone to see what's ripe nearby, and locals who add trees the map is missing and report what they find. The repo `/Users/hmiguel/github/fruits-lisbon` is empty (git initialised, no commits).
+The user wants a community social project: a map of fruit trees in Lisbon showing which ones can be picked **right now**, based on the season. It serves two kinds of people (user's answer: "Both"): someone out walking who opens it on their phone to see what's ripe nearby, and locals who add trees the map is missing and report what they find.
 
 Recon findings that shape the design:
 - **Lisbon's open tree inventory** (Arvoredo, CC0) is a live ArcGIS FeatureServer:

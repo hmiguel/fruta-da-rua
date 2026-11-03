@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { i18n, t } from '../i18n/index.svelte.ts';
+	import { REPO_URL, SPONSOR_URL } from '../site.ts';
 
 	let generatedAt: string | null = $state(null);
 	const dataDate = $derived(
@@ -19,6 +20,7 @@
 
 <div class="about" data-testid="about">
 	<p>{t('about.body')}</p>
+	<p class="made">{t('about.made')}</p>
 
 	<h3>{t('about.data_title')}</h3>
 	<p>
@@ -30,6 +32,13 @@
 	<ul>
 		<li><a href="https://fallingfruit.org" target="_blank" rel="noopener">Falling Fruit</a></li>
 		<li>Muita Fruta (Cozinha Popular da Mouraria)</li>
+	</ul>
+
+	<h3>{t('about.open_title')}</h3>
+	<p>{t('about.open_body')}</p>
+	<ul class="links">
+		<li><a href={REPO_URL} target="_blank" rel="noopener" data-testid="repo">{t('about.code')}</a></li>
+		<li><a href={SPONSOR_URL} target="_blank" rel="noopener" data-testid="sponsor">{t('about.sponsor')}</a></li>
 	</ul>
 </div>
 
@@ -46,6 +55,14 @@
 		font-weight: 400;
 		font-size: 1.15rem;
 		color: var(--pencil);
+	}
+	.made {
+		margin-top: 10px;
+		font-family: var(--font-hand);
+		font-size: 1.1rem;
+	}
+	.links {
+		margin-top: 4px;
 	}
 	.date {
 		color: var(--pencil);

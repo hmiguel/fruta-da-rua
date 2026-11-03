@@ -28,3 +28,13 @@ test('about dialog credits the data and shows its date', async ({ page }) => {
 	await page.keyboard.press('Escape');
 	await expect(about).toHaveCount(0);
 });
+
+test('about says where it is made and links to the code and to sponsoring', async ({ page }) => {
+	await page.goto('/');
+	await page.getByTestId('menu-open').click();
+	await page.getByTestId('about-open').click();
+	const about = page.getByTestId('about');
+	await expect(about).toContainText('Feito na Europa');
+	await expect(about.getByTestId('repo')).toHaveAttribute('href', 'https://github.com/hmiguel/fruta-da-rua');
+	await expect(about.getByTestId('sponsor')).toHaveAttribute('href', 'https://github.com/sponsors/hmiguel');
+});

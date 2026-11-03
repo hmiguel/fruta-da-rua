@@ -187,3 +187,11 @@ test('menu fills the window; About and Etiquette are separate', async ({ page })
 	await expect(page.getByTestId('etiquette')).toContainText('Regulamento Municipal do Arvoredo');
 	await expect(page.getByRole('heading', { level: 2 })).toHaveText('Boas maneiras');
 });
+
+test('the menu shows the version with the commit it was built from', async ({ page }) => {
+	await page.goto('/');
+	await page.getByTestId('menu-open').click();
+	const note = page.getByTestId('panel-note');
+	await expect(note).toHaveText(/^Versão \d+\.\d+\.\d+ \([0-9a-f]{7}\)$/);
+	await expect(note).toHaveAttribute('href', /^https:\/\/github\.com\/hmiguel\/fruta-da-rua\/commit\/[0-9a-f]{40}$/);
+});

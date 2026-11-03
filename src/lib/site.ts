@@ -4,6 +4,8 @@ import type { Lang } from './i18n/index.svelte.ts';
 
 /** Public name and address. Change here when the final name and domain are chosen. */
 export const SITE_NAME = 'Fruta da Rua';
+export const REPO_URL = 'https://github.com/hmiguel/fruta-da-rua';
+export const SPONSOR_URL = 'https://github.com/sponsors/hmiguel';
 export const SITE_URL = (import.meta.env?.PUBLIC_SITE_URL as string | undefined) ?? 'https://fruta-da-rua.lixo.dev';
 
 export const EDIBLE: Species[] = SPECIES.filter((s) => s.tier !== 'excluded');

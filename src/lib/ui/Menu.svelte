@@ -6,7 +6,7 @@
 	import { version } from '../../../package.json';
 	import { filtersToQuery } from '../filters.ts';
 	import { i18n, t, type Lang } from '../i18n/index.svelte.ts';
-	import { SITE_NAME, calendarPath, homePath } from '../site.ts';
+	import { REPO_URL, SITE_NAME, calendarPath, homePath } from '../site.ts';
 	import { app } from '../state.svelte.ts';
 	import AboutContent from './AboutContent.svelte';
 	import EtiquetteContent from './EtiquetteContent.svelte';
@@ -30,6 +30,11 @@
 	const langHref = (l: Lang) =>
 		(l === i18n.lang ? page.url.pathname : page.data.alternate) +
 		(page.url.pathname === homePath(i18n.lang) ? filtersToQuery(app.filters, l) : '');
+
+	// "Versão 0.1.0 (55315d5)", linking to that commit so anyone can see exactly what is running.
+	const sha = __COMMIT__.slice(0, 7);
+	const versionNote = $derived(t('menu.version', { v: sha ? `${version} (${sha})` : version }));
+	const commitHref = __COMMIT__ ? `${REPO_URL}/commit/${__COMMIT__}` : null;
 
 	const here = (path: string) => (page.url.pathname === path ? 'page' : undefined);
 
@@ -86,7 +91,7 @@
 	}}
 >
 	{#if view === 'main'}
-		<PanelHead id="menu-title" title={SITE_NAME} note={t('menu.version', { v: version })} {onClose} />
+		<PanelHead id="menu-title" title={SITE_NAME} note={versionNote} noteHref={commitHref} {onClose} />
 		<nav aria-labelledby="menu-title">
 			<ul>
 				<li>

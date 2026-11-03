@@ -79,5 +79,10 @@
 	"menu.etiquette": "Etiquette",
 	"about.data_title": "Data",
 	"etiquette.law_title": "What the law says",
-	"about.source": "Lisbon City Council, Open Data (CC0)."
+	"about.source": "Lisbon City Council, Open Data (CC0).",
+	"about.made": "Made in Europe.",
+	"about.open_title": "Open source",
+	"about.open_body": "Fruta da Rua is free and open source. Anyone can read the code, suggest improvements or help fix trees.",
+	"about.code": "See the code on GitHub",
+	"about.sponsor": "Sponsor the project"
 }

@@ -7,9 +7,17 @@
 		id,
 		title,
 		note = null,
+		noteHref = null,
 		onBack = null,
 		onClose
-	}: { id: string; title: string; note?: string | null; onBack?: (() => void) | null; onClose: () => void } = $props();
+	}: {
+		id: string;
+		title: string;
+		note?: string | null;
+		noteHref?: string | null;
+		onBack?: (() => void) | null;
+		onClose: () => void;
+	} = $props();
 </script>
 
 <div class="head" class:sub={onBack}>
@@ -18,7 +26,11 @@
 	{/if}
 	<div class="titles">
 		<h2 {id}>{title}</h2>
-		{#if note}<p>{note}</p>{/if}
+		{#if note && noteHref}
+			<p><a href={noteHref} target="_blank" rel="noopener" data-testid="panel-note">{note}</a></p>
+		{:else if note}
+			<p>{note}</p>
+		{/if}
 	</div>
 	<IconButton icon="close" label={t('panel.close')} data-testid="panel-close" onclick={onClose} />
 </div>
@@ -49,5 +61,9 @@
 		margin: 0;
 		font-size: 0.85rem;
 		color: var(--pencil);
+	}
+	p a {
+		color: inherit;
+		text-underline-offset: 3px;
 	}
 </style>

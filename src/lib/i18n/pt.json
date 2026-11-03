@@ -79,5 +79,10 @@
 	"menu.etiquette": "Boas maneiras",
 	"about.data_title": "Dados",
 	"etiquette.law_title": "O que diz a lei",
-	"about.source": "Câmara Municipal de Lisboa, Dados Abertos (CC0)."
+	"about.source": "Câmara Municipal de Lisboa, Dados Abertos (CC0).",
+	"about.made": "Feito na Europa.",
+	"about.open_title": "Código aberto",
+	"about.open_body": "A Fruta da Rua é software livre e aberto. Qualquer pessoa pode ver o código, sugerir melhorias ou ajudar a corrigir árvores.",
+	"about.code": "Ver o código no GitHub",
+	"about.sponsor": "Apoiar o projeto"
 }

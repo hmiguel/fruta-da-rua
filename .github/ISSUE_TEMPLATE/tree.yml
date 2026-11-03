@@ -1,0 +1,26 @@
+name: A tree is wrong or missing
+description: A tree that isn't there, is another species, or is on private ground
+labels: [data]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong?
+      options:
+        - The tree is missing from the map
+        - The tree is not there any more
+        - It is a different species
+        - It is on private ground
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: Address, or a link to the tree on the map or on another map
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Anything else
