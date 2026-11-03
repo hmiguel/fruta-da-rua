@@ -136,6 +136,10 @@ test('menu: feedback by email, Escape closes and gives focus back', async ({ pag
 	const menu = page.getByTestId('menu');
 	await expect(menu).toBeFocused();
 	await expect(menu.getByTestId('feedback')).toHaveAttribute('href', /^mailto:hugo@lixo\.dev\?subject=/);
+	await expect(menu.getByTestId('sponsor-open')).toHaveAttribute('href', 'https://github.com/sponsors/hmiguel');
+	await expect(menu).not.toContainText('Abre o seu email');
+	// Everything behind the full-window menu is switched off while it is open.
+	await expect(page.getByTestId('summary-panel')).toHaveAttribute('inert');
 	await page.getByTestId('settings-open').click();
 	await page.getByTestId('panel-back').click();
 	await expect(menu.getByTestId('settings-open')).toBeFocused();
@@ -159,16 +163,16 @@ test('fruit pages have the same menu as the map, with the language in settings',
 	await page.getByTestId('lang-en').click();
 	await expect(page).toHaveURL(/\/en\/fruit\/fig$/);
 	await page.getByTestId('menu-open').click();
-	await expect(page.getByTestId('menu').getByRole('link', { name: 'Fruit calendar' })).not.toHaveAttribute(
-		'aria-current'
-	);
-	await page.getByTestId('menu').getByRole('link', { name: 'Fruit calendar' }).click();
-	await expect(page).toHaveURL(/\/en\/fruit$/);
-	await page.getByTestId('menu-open').click();
-	await expect(page.getByTestId('menu').getByRole('link', { name: 'Fruit calendar' })).toHaveAttribute(
-		'aria-current',
-		'page'
-	);
+	// The calendar opens inside the menu like every other entry; a fruit there opens its page.
+	await page.getByTestId('calendar-open').click();
+	await expect(page.getByTestId('panel-back')).toBeFocused();
+	await expect(page.getByTestId('menu').getByRole('heading', { level: 2 })).toHaveText('Fruit calendar');
+	await page
+		.getByTestId('calendar')
+		.getByRole('link', { name: /Loquat/ })
+		.click();
+	await expect(page).toHaveURL(/\/en\/fruit\/loquat$/);
+	await expect(page.getByTestId('menu')).toHaveCount(0);
 });
 
 test('menu fills the window; About and Etiquette are separate', async ({ page }) => {
@@ -255,4 +259,19 @@ test('bottom sheet sits closed at the bottom from the first frame', async ({ pag
 		expect(y).toBeGreaterThan(vh - 120);
 		await page.waitForTimeout(60);
 	}
+});
+
+test('menu order: map and calendar, etiquette and settings, sponsor and feedback, About last', async ({ page }) => {
+	await page.goto('/');
+	await page.getByTestId('menu-open').click();
+	const labels = await page.getByTestId('menu').locator('.row .label').allTextContents();
+	expect(labels).toEqual([
+		'Mapa',
+		'Calendário da fruta',
+		'Boas maneiras',
+		'Definições',
+		'Apoiar o projeto',
+		'Enviar sugestão',
+		'Sobre'
+	]);
 });

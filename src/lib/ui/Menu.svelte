@@ -6,9 +6,10 @@
 	import { version } from '../../../package.json';
 	import { filtersToQuery } from '../filters.ts';
 	import { i18n, t, type Lang } from '../i18n/index.svelte.ts';
-	import { REPO_URL, SITE_NAME, calendarPath, homePath } from '../site.ts';
+	import { REPO_URL, SITE_NAME, SPONSOR_URL, homePath } from '../site.ts';
 	import { app } from '../state.svelte.ts';
 	import AboutContent from './AboutContent.svelte';
+	import CalendarContent from './CalendarContent.svelte';
 	import EtiquetteContent from './EtiquetteContent.svelte';
 	import Icon, { type IconName } from './kit/Icon.svelte';
 	import PanelHead from './kit/PanelHead.svelte';
@@ -38,7 +39,7 @@
 
 	const here = (path: string) => (page.url.pathname === path ? 'page' : undefined);
 
-	type View = 'main' | 'about' | 'etiquette' | 'settings';
+	type View = 'main' | 'calendar' | 'about' | 'etiquette' | 'settings';
 	let view = $state<View>('main');
 
 	/** Sub-views open in place; focus goes to their back button, and back to the row that opened them. */
@@ -54,8 +55,17 @@
 	beforeNavigate(() => onClose());
 
 	onMount(() => {
+		// The menu covers the whole window: switch off everything around it for keyboards and
+		// screen readers until it closes.
+		const around = [...(drawer.parentElement?.children ?? [])].filter(
+			(el): el is HTMLElement => el !== drawer && el instanceof HTMLElement && !el.inert
+		);
+		for (const el of around) el.inert = true;
 		drawer.focus();
-		return () => document.getElementById('menu-button')?.focus();
+		return () => {
+			for (const el of around) el.inert = false;
+			document.getElementById('menu-button')?.focus();
+		};
 	});
 
 	function onKey(e: KeyboardEvent) {
@@ -100,18 +110,13 @@
 					>
 				</li>
 				<li>
-					<a class="row" href={calendarPath(i18n.lang)} aria-current={here(calendarPath(i18n.lang))}
-						>{@render inside('calendar', t('menu.calendar'), false)}</a
+					<button class="row" data-view="calendar" data-testid="calendar-open" onclick={() => show('calendar')}
+						>{@render inside('calendar', t('menu.calendar'), true)}</button
 					>
 				</li>
 			</ul>
 			<hr />
 			<ul>
-				<li>
-					<button class="row" data-view="about" data-testid="about-open" onclick={() => show('about')}
-						>{@render inside('info', t('menu.about'), true)}</button
-					>
-				</li>
 				<li>
 					<button class="row" data-view="etiquette" data-testid="etiquette-open" onclick={() => show('etiquette')}
 						>{@render inside('leaf', t('menu.etiquette'), true)}</button
@@ -126,11 +131,23 @@
 			<hr />
 			<ul>
 				<li>
+					<a class="row" href={SPONSOR_URL} target="_blank" rel="noopener" data-testid="sponsor-open"
+						>{@render inside('heart', t('about.sponsor'), false)}</a
+					>
+				</li>
+				<li>
 					<a class="row" href={mail} data-testid="feedback">{@render inside('mail', t('menu.feedback'), false)}</a>
-					<p class="hint">{t('menu.feedback_hint')}</p>
+				</li>
+				<li>
+					<button class="row" data-view="about" data-testid="about-open" onclick={() => show('about')}
+						>{@render inside('info', t('menu.about'), true)}</button
+					>
 				</li>
 			</ul>
 		</nav>
+	{:else if view === 'calendar'}
+		<PanelHead id="menu-title" title={t('menu.calendar')} onBack={() => show('main')} {onClose} />
+		<CalendarContent />
 	{:else if view === 'about'}
 		<PanelHead id="menu-title" title={t('menu.about')} onBack={() => show('main')} {onClose} />
 		<AboutContent />
@@ -214,11 +231,6 @@
 	}
 	.tick {
 		font-weight: 700;
-	}
-	.hint {
-		margin: -8px 20px 4px 56px;
-		font-size: 0.85rem;
-		color: var(--pencil);
 	}
 	hr {
 		margin: 8px 20px;
