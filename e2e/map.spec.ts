@@ -195,3 +195,64 @@ test('the menu shows the version with the commit it was built from', async ({ pa
 	await expect(note).toHaveText(/^Versão \d+\.\d+\.\d+ \([0-9a-f]{7}\)$/);
 	await expect(note).toHaveAttribute('href', /^https:\/\/github\.com\/hmiguel\/fruta-da-rua\/commit\/[0-9a-f]{40}$/);
 });
+
+test('bottom sheet: tap opens the nearest trees, picking one opens it and closes the list', async ({ page }) => {
+	await page.goto('/');
+	const toggle = page.getByTestId('nearby-toggle');
+	await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+	await toggle.click();
+	await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+	const list = page.getByTestId('nearby-list');
+	await expect(list).toContainText('Mais perto do centro do mapa');
+	const rows = list.getByTestId('nearby-row');
+	await expect(rows.first()).toBeInViewport();
+	// Closest first.
+	const metres = (await rows.locator('.far').allTextContents()).map((s) =>
+		s.endsWith(' km') ? parseFloat(s.replace(',', '.')) * 1000 : parseInt(s)
+	);
+	expect(metres).toEqual([...metres].sort((a, b) => a - b));
+	const fruit = (await rows.first().locator('.fruit').textContent())!;
+	await rows.first().click();
+	await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+	await expect(page.getByTestId('tree-sheet')).toContainText(fruit);
+});
+
+test('bottom sheet follows a drag up and down', async ({ page }) => {
+	await page.goto('/');
+	const toggle = page.getByTestId('nearby-toggle');
+	await expect(page.getByTestId('chip-all')).toBeVisible();
+	const box = (await toggle.boundingBox())!;
+	const x = box.x + 40;
+	const y = box.y + box.height / 2;
+	await page.mouse.move(x, y);
+	await page.mouse.down();
+	for (let i = 1; i <= 10; i++) await page.mouse.move(x, y - i * 25);
+	await page.mouse.up();
+	await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+	await expect(page.getByTestId('nearby-row').first()).toBeInViewport();
+	const top = (await toggle.boundingBox())!;
+	await page.mouse.move(x, top.y + 20);
+	await page.mouse.down();
+	for (let i = 1; i <= 10; i++) await page.mouse.move(x, top.y + 20 + i * 25);
+	await page.mouse.up();
+	await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+	await expect(page.getByTestId('nearby-row').first()).not.toBeInViewport();
+});
+
+test('Escape closes the nearby list', async ({ page }) => {
+	await page.goto('/');
+	await page.getByTestId('nearby-toggle').click();
+	await page.keyboard.press('Escape');
+	await expect(page.getByTestId('nearby-toggle')).toHaveAttribute('aria-expanded', 'false');
+});
+
+test('bottom sheet sits closed at the bottom from the first frame', async ({ page }) => {
+	await page.goto('/');
+	await expect(page.getByTestId('chip-all')).toBeVisible();
+	const vh = page.viewportSize()!.height;
+	for (let i = 0; i < 5; i++) {
+		const y = (await page.getByTestId('nearby-toggle').boundingBox())!.y;
+		expect(y).toBeGreaterThan(vh - 120);
+		await page.waitForTimeout(60);
+	}
+});

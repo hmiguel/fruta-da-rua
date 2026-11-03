@@ -13,7 +13,7 @@
 	import FruitChips from './FruitChips.svelte';
 	import Menu from './Menu.svelte';
 	import SearchBar from './SearchBar.svelte';
-	import SummaryPanel from './SummaryPanel.svelte';
+	import NearbySheet from './NearbySheet.svelte';
 	import TreeSheet from './TreeSheet.svelte';
 
 	let now = $state(new Date());
@@ -24,6 +24,7 @@
 	let failed = $state(false);
 	let bounds = $state<BBox>(LISBON_BBOX);
 	let panelHeight = $state(0);
+	let here = $state<[number, number] | null>(null);
 	let ready = $state(false);
 
 	const summary = $derived(trees ? summarize(trees.features, bounds, app.filters) : { visible: 0, bySpecies: [] });
@@ -74,7 +75,7 @@
 	<h1 class="sr-only">{t('app.title')}</h1>
 	<a class="skip" href="#fruit-search">{t('nav.skip')}</a>
 	{#if trees}
-		<MapView {trees} filters={app.filters} onBounds={(b) => (bounds = b)} />
+		<MapView {trees} filters={app.filters} onBounds={(b) => (bounds = b)} onLocate={(p) => (here = p)} />
 	{/if}
 	<div class="top">
 		<SearchBar {now} {totals} />
@@ -82,8 +83,11 @@
 			<FruitChips counts={summary.bySpecies} />
 		{/if}
 	</div>
-	<SummaryPanel
+	<NearbySheet
 		bind:height={panelHeight}
+		trees={trees?.features ?? []}
+		{bounds}
+		{here}
 		visible={summary.visible}
 		status={trees ? null : failed ? t('app.load_error') : t('app.loading')}
 	/>

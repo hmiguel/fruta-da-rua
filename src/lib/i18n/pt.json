@@ -84,5 +84,11 @@
 	"about.open_title": "Código aberto",
 	"about.open_body": "A Fruta da Rua é software livre e aberto. Qualquer pessoa pode ver o código, sugerir melhorias ou ajudar a corrigir árvores.",
 	"about.code": "Ver o código no GitHub",
-	"about.sponsor": "Apoiar o projeto"
+	"about.sponsor": "Apoiar o projeto",
+	"nearby.show": "Ver as árvores mais perto",
+	"nearby.hide": "Esconder a lista",
+	"nearby.from_you": "Mais perto de si",
+	"nearby.from_center": "Mais perto do centro do mapa",
+	"nearby.more": "Mais {n} nesta zona. Aproxime o mapa para ver outras.",
+	"nearby.none": "Sem árvores nesta zona."
 }

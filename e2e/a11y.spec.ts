@@ -42,6 +42,9 @@ test('axe: tree sheet, menu, About and search', async ({ page }) => {
 	await page.keyboard.press('Escape');
 	await page.getByTestId('chip-more').click();
 	await noViolations(page, 'search');
+	await page.keyboard.press('Escape');
+	await page.getByTestId('nearby-toggle').click();
+	await noViolations(page, 'nearby list');
 });
 
 test('keyboard: skip link first, menu traps focus, back returns to the row, Escape closes only the menu', async ({

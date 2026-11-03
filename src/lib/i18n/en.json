@@ -84,5 +84,11 @@
 	"about.open_title": "Open source",
 	"about.open_body": "Fruta da Rua is free and open source. Anyone can read the code, suggest improvements or help fix trees.",
 	"about.code": "See the code on GitHub",
-	"about.sponsor": "Sponsor the project"
+	"about.sponsor": "Sponsor the project",
+	"nearby.show": "Show the nearest trees",
+	"nearby.hide": "Hide the list",
+	"nearby.from_you": "Nearest to you",
+	"nearby.from_center": "Nearest to the middle of the map",
+	"nearby.more": "{n} more in this area. Zoom in to see others.",
+	"nearby.none": "No trees in this area."
 }

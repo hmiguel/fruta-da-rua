@@ -10,7 +10,17 @@
 	import { keepLayer, naturePaint } from './nature-style.ts';
 	import { SPECIES } from '../species.ts';
 
-	let { trees, filters, onBounds }: { trees: EnrichedFC; filters: Filters; onBounds: (b: BBox) => void } = $props();
+	let {
+		trees,
+		filters,
+		onBounds,
+		onLocate
+	}: {
+		trees: EnrichedFC;
+		filters: Filters;
+		onBounds: (b: BBox) => void;
+		onLocate: (p: [number, number]) => void;
+	} = $props();
 
 	let container: HTMLDivElement;
 	let map: MapLibreMap | undefined = $state();
@@ -86,6 +96,7 @@
 				fitBoundsOptions: { maxZoom: 16 }
 			});
 			m.addControl(geolocate, 'bottom-right');
+			geolocate.on('geolocate', (pos: GeolocationPosition) => onLocate([pos.coords.longitude, pos.coords.latitude]));
 
 			m.on('load', async () => {
 				await addFruitImages(m);
@@ -189,6 +200,21 @@
 		const f = filters;
 		const features = trees.features.filter((t) => matchesFilter(t.properties, f));
 		(map.getSource('trees') as GeoJSONSource).setData({ type: 'FeatureCollection', features });
+	});
+
+	// A tree picked from a list: bring it into view above the tree sheet.
+	$effect(() => {
+		const to = app.focus;
+		if (!map || !loaded || !to) return;
+		const wide = window.innerWidth >= 768;
+		map.easeTo({
+			center: to,
+			zoom: Math.max(map.getZoom(), 17),
+			padding: wide
+				? { top: 0, bottom: 0, left: 0, right: 400 }
+				: { top: 0, bottom: Math.round(window.innerHeight * 0.55), left: 0, right: 0 }
+		});
+		app.focus = null;
 	});
 
 	$effect(() => {
