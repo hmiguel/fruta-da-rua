@@ -31,6 +31,9 @@ test('axe: tree sheet, menu, About and search', async ({ page }) => {
 	await noViolations(page, 'tree sheet');
 	await page.getByTestId('menu-open').click();
 	await noViolations(page, 'menu');
+	await page.getByTestId('settings-open').click();
+	await noViolations(page, 'settings');
+	await page.getByTestId('settings-back').click();
 	await page.getByTestId('about-open').click();
 	await noViolations(page, 'about');
 	await page.keyboard.press('Escape');
@@ -73,7 +76,10 @@ for (const width of [360, 390]) {
 					.filter((el) => el.offsetParent !== null && !el.classList.contains('skip'))
 					.map((el) => ({ el, r: el.getBoundingClientRect() }))
 					.filter(({ r }) => r.width > 0 && (r.width < 44 || r.height < 44))
-					.map(({ el, r }) => `${el.tagName} "${el.textContent?.trim().slice(0, 20)}" ${Math.round(r.width)}x${Math.round(r.height)}`)
+					.map(
+						({ el, r }) =>
+							`${el.tagName} "${el.textContent?.trim().slice(0, 20)}" ${Math.round(r.width)}x${Math.round(r.height)}`
+					)
 			);
 			expect(small, path).toEqual([]);
 		}

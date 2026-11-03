@@ -73,7 +73,9 @@
 	"menu.feedback_subject": "Sugestão para a Fruta da Rua",
 	"menu.about": "Sobre e boas maneiras",
 	"menu.version": "Versão {v}",
-	"lang.name": "English",
 	"lang.toggle": "EN",
-	"nav.skip_content": "Saltar para o conteúdo"
+	"nav.skip_content": "Saltar para o conteúdo",
+	"menu.settings": "Definições",
+	"menu.back": "Voltar ao menu",
+	"settings.language": "Língua"
 }

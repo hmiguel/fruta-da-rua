@@ -17,11 +17,16 @@ test('November chips offer persimmon/pomegranate/olive, not fig', async ({ page 
 	await expect(page.getByTestId('visible-count')).toHaveText(/\d+ árvores nesta zona/);
 });
 
-test('language switch in the menu goes to the English page and stays there', async ({ page }) => {
+test('language is chosen in the menu settings, keeps the filters, and stays', async ({ page }) => {
 	await page.goto('/');
+	await page.getByTestId('chip-olive').click();
 	await page.getByTestId('menu-open').click();
-	await page.getByTestId('lang').click();
-	await expect(page).toHaveURL(/\/en$/);
+	await page.getByTestId('settings-open').click();
+	await expect(page.getByTestId('settings-back')).toBeFocused();
+	await expect(page.getByTestId('lang-pt')).toHaveAttribute('aria-current', 'true');
+	await page.getByTestId('lang-en').click();
+	await expect(page).toHaveURL(/\/en\?fruta=olive$/);
+	await expect(page.getByTestId('chip-olive')).toHaveAttribute('aria-pressed', 'true');
 	await expect(page.getByTestId('toggle-pickable')).toHaveText('In season');
 	await page.reload();
 	await expect(page.getByTestId('toggle-pickable')).toHaveText('In season');
@@ -131,6 +136,9 @@ test('menu: feedback by email, Escape closes and gives focus back', async ({ pag
 	const menu = page.getByTestId('menu');
 	await expect(menu).toBeFocused();
 	await expect(menu.getByTestId('feedback')).toHaveAttribute('href', /^mailto:hugo@lixo\.dev\?subject=/);
+	await page.getByTestId('settings-open').click();
+	await page.getByTestId('settings-back').click();
+	await expect(menu.getByTestId('settings-open')).toBeFocused();
 	await page.keyboard.press('Escape');
 	await expect(menu).toHaveCount(0);
 	await expect(page.getByTestId('menu-open')).toBeFocused();

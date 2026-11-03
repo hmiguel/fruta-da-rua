@@ -73,7 +73,9 @@
 	"menu.feedback_subject": "Feedback on Fruta da Rua",
 	"menu.about": "About and etiquette",
 	"menu.version": "Version {v}",
-	"lang.name": "Português",
 	"lang.toggle": "PT",
-	"nav.skip_content": "Skip to content"
+	"nav.skip_content": "Skip to content",
+	"menu.settings": "Settings",
+	"menu.back": "Back to menu",
+	"settings.language": "Language"
 }
