@@ -7,6 +7,7 @@
 	import { onMount } from 'svelte';
 	import { topLayer } from '../state.svelte.ts';
 	import MonthsBar from './MonthsBar.svelte';
+	import IconButton from './kit/IconButton.svelte';
 
 	let { tree, month, onClose }: { tree: Feature<Point, EnrichedProps>; month: number; onClose: () => void } = $props();
 
@@ -44,7 +45,9 @@
 		startY = null;
 	}}
 >
-	<button class="close" aria-label={t('sheet.close')} onclick={onClose}>×</button>
+	<span class="close"
+		><IconButton icon="close" label={t('panel.close')} data-testid="panel-close" onclick={onClose} /></span
+	>
 	<div class="plate">
 		<FruitArt species={sp} size={104} eager />
 		<div>
@@ -97,13 +100,6 @@
 		position: absolute;
 		top: 6px;
 		right: 6px;
-		width: 44px;
-		height: 44px;
-		border: 0;
-		background: none;
-		font-family: var(--font-hand);
-		font-size: 1.8rem;
-		line-height: 1;
 	}
 	.plate {
 		display: flex;

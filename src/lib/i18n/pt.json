@@ -43,15 +43,12 @@
 	"about.rules": "Em Lisboa é proibido trepar e varejar as árvores públicas (Regulamento Municipal do Arvoredo, art. 9.º). Frutos com apanha proibida por lei, como a pinha de pinheiro-manso, não aparecem no mapa.",
 	"sheet.months": "Meses de colheita",
 	"sheet.parish": "Freguesia",
-	"sheet.close": "Fechar",
 	"locate": "Encontrar a minha localização",
-	"about.title": "Sobre a Fruta da Rua",
 	"about.body": "Um mapa comunitário das árvores de fruto de Lisboa que mostra o que está na época. As épocas são estimativas para o clima de Lisboa e cada árvore é diferente.",
 	"about.etiquette_title": "Boas maneiras",
 	"about.credit": "Dados: Câmara Municipal de Lisboa, Dados Abertos (CC0).",
 	"about.data_date": "Dados de {date}",
 	"about.related": "Projetos irmãos",
-	"about.close": "Fechar",
 	"search.label": "Procurar fruta",
 	"search.clear": "Limpar pesquisa",
 	"search.results": "{n} frutos",
@@ -77,5 +74,7 @@
 	"nav.skip_content": "Saltar para o conteúdo",
 	"menu.settings": "Definições",
 	"menu.back": "Voltar ao menu",
-	"settings.language": "Língua"
+	"settings.language": "Língua",
+	"panel.close": "Fechar",
+	"menu.feedback_hint": "Abre o seu email"
 }

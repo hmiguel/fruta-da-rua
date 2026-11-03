@@ -1,5 +1,6 @@
 <script lang="ts">
 	import FruitArt from '../art/FruitArt.svelte';
+	import IconButton from './kit/IconButton.svelte';
 	import { searchFruits } from '../filters.ts';
 	import { speciesName, t, tn } from '../i18n/index.svelte.ts';
 	import { isPickable, seasonStatus } from '../season.ts';
@@ -55,20 +56,16 @@
 
 <svelte:window onkeydown={onKey} />
 
-<div class="bar" class:open={app.searchOpen}>
-	<button
+<div class="bar paper-bar" class:open={app.searchOpen}>
+	<IconButton
 		id="menu-button"
-		class="icon"
-		aria-label={t('menu.open')}
+		icon="menu"
+		label={t('menu.open')}
 		aria-expanded={app.menuOpen}
-		aria-controls="menu"
+		aria-controls={app.menuOpen ? 'menu' : undefined}
 		data-testid="menu-open"
 		onclick={() => (app.menuOpen = true)}
-	>
-		<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-			<path d="M4 7.2c5.3-.5 10.6-.4 16 .1M4 12.1c5.1.3 10.4-.2 16 0M4 16.9c5.6-.4 10.9.2 16-.2" />
-		</svg>
-	</button>
+	/>
 	<label class="sr-only" for="fruit-search">{t('search.label')}</label>
 	<input
 		id="fruit-search"
@@ -86,11 +83,7 @@
 		onkeyup={(e) => e.key === 'Enter' && results[0] && pick(results[0].id, isPickable(seasonStatus(results[0], now)))}
 	/>
 	{#if app.searchOpen}
-		<button class="icon" aria-label={t('search.close')} onclick={close}>
-			<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-				<path d="M6.2 6c4 3.8 7.8 7.9 11.6 12M17.8 6.1c-4.1 3.7-7.9 7.8-11.7 11.8" />
-			</svg>
-		</button>
+		<IconButton icon="close" label={t('search.close')} data-testid="search-close" onclick={close} />
 	{/if}
 </div>
 
@@ -131,32 +124,7 @@
 
 <style>
 	.bar {
-		display: flex;
-		align-items: center;
-		gap: 2px;
-		height: 52px;
-		padding: 0 4px;
-		background: var(--sheet);
-		border: 1.5px solid var(--ink);
-		border-radius: 14px 18px 15px 16px;
-		box-shadow: 0 3px 10px rgb(58 50 38 / 0.14);
 		pointer-events: auto;
-	}
-	.icon {
-		flex: none;
-		display: grid;
-		place-items: center;
-		width: 44px;
-		height: 44px;
-		border: 0;
-		border-radius: 50%;
-		background: none;
-	}
-	.icon path {
-		fill: none;
-		stroke: var(--ink);
-		stroke-width: 2;
-		stroke-linecap: round;
 	}
 	input {
 		flex: 1;
@@ -199,21 +167,22 @@
 		margin: 0;
 		padding: 4px 0;
 	}
-	li + li .row {
-		border-top: 1px solid var(--rule);
-	}
+	/* Same row as the menu: inset, rounded, the green wash marks what is chosen. */
 	.row {
-		width: 100%;
+		width: calc(100% - 16px);
 		display: grid;
 		grid-template-columns: 40px 1fr 24px;
 		align-items: center;
 		gap: 12px;
 		min-height: 56px;
-		padding: 6px 14px;
+		margin: 1px 8px;
+		padding: 6px 12px;
 		border: 0;
+		border-radius: 12px 14px 12px 13px;
 		background: none;
 		text-align: left;
 	}
+	.row:active,
 	.row[aria-pressed='true'] {
 		background: var(--wash);
 	}

@@ -10,7 +10,6 @@
 	import { app } from '$lib/state.svelte.ts';
 	import type { TreeProps } from '$lib/types.ts';
 	import { unpackTrees, type PackedTrees } from '$lib/trees-format.ts';
-	import About from './About.svelte';
 	import FruitChips from './FruitChips.svelte';
 	import Menu from './Menu.svelte';
 	import SearchBar from './SearchBar.svelte';
@@ -93,9 +92,6 @@
 	{/if}
 	{#if app.menuOpen}
 		<Menu onClose={() => (app.menuOpen = false)} />
-	{/if}
-	{#if app.aboutOpen}
-		<About onClose={() => (app.aboutOpen = false)} />
 	{/if}
 </main>
 

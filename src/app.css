@@ -56,3 +56,16 @@ button {
 	clip: rect(0 0 0 0);
 	white-space: nowrap;
 }
+
+/* The floating bar at the top of every screen: map search and page header. */
+.paper-bar {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	height: 52px;
+	padding: 0 4px;
+	background: var(--sheet);
+	border: 1.5px solid var(--ink);
+	border-radius: 14px 18px 15px 16px;
+	box-shadow: 0 3px 10px rgb(58 50 38 / 0.14);
+}

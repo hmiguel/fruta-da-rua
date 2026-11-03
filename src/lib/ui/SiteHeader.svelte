@@ -1,22 +1,29 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { i18n, t } from '../i18n/index.svelte.ts';
-	import { calendarPath, homePath } from '../site.ts';
+	import { homePath } from '../site.ts';
+	import { app } from '../state.svelte.ts';
+	import IconButton from './kit/IconButton.svelte';
+	import Menu from './Menu.svelte';
 </script>
 
 <a class="skip" href="#main">{t('nav.skip_content')}</a>
 <header>
-	<a class="brand" href={homePath(i18n.lang)}>{t('app.title')}</a>
-	<nav aria-label={t('app.title')}>
-		<a href={homePath(i18n.lang)}>{t('nav.map')}</a>
-		<a href={calendarPath(i18n.lang)} aria-current={page.url.pathname === calendarPath(i18n.lang) ? 'page' : undefined}
-			>{t('nav.calendar')}</a
-		>
-		<a class="lang" href={page.data.alternate} hreflang={i18n.lang === 'pt' ? 'en' : 'pt-PT'} data-testid="lang"
-			>{t('lang.toggle')}</a
-		>
-	</nav>
+	<div class="bar paper-bar">
+		<IconButton
+			id="menu-button"
+			icon="menu"
+			label={t('menu.open')}
+			aria-expanded={app.menuOpen}
+			aria-controls={app.menuOpen ? 'menu' : undefined}
+			data-testid="menu-open"
+			onclick={() => (app.menuOpen = true)}
+		/>
+		<a class="brand" href={homePath(i18n.lang)}>{t('app.title')}</a>
+	</div>
 </header>
+{#if app.menuOpen}
+	<Menu onClose={() => (app.menuOpen = false)} />
+{/if}
 
 <style>
 	.skip {
@@ -34,45 +41,23 @@
 		top: 8px;
 	}
 	header {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: space-between;
-		gap: 4px 12px;
+		position: sticky;
+		top: 0;
+		z-index: 5;
 		max-width: 760px;
 		margin: 0 auto;
-		padding: max(6px, env(safe-area-inset-top)) 16px 6px;
+		padding: max(10px, env(safe-area-inset-top)) 12px 10px;
+		background: linear-gradient(var(--paper) 70%, transparent);
 	}
 	.brand {
 		display: inline-flex;
 		align-items: center;
 		min-height: 44px;
+		padding: 0 6px;
 		font-family: var(--font-hand);
 		font-weight: 700;
-		font-size: 1.6rem;
+		font-size: 1.35rem;
 		color: var(--ink);
 		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		gap: 2px;
-	}
-	nav a {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		min-width: 44px;
-		min-height: 44px;
-		padding: 0 10px;
-		font-family: var(--font-hand);
-		font-size: 1.1rem;
-		color: var(--ink);
-		text-underline-offset: 5px;
-	}
-	nav a[aria-current='page'] {
-		text-decoration: underline wavy;
-	}
-	.lang {
-		font-weight: 700;
 	}
 </style>

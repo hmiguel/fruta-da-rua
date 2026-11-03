@@ -3,13 +3,12 @@ import { DEFAULT_FILTERS, toggleSpecies, type Filters } from './filters.ts';
 export const app = $state({
 	filters: { ...DEFAULT_FILTERS } as Filters,
 	selectedTreeId: null as string | null,
-	aboutOpen: false,
 	menuOpen: false,
 	searchOpen: false
 });
 
 /** The dialog on top takes Escape first. */
-export const topLayer = () => (app.aboutOpen ? 'about' : app.menuOpen ? 'menu' : app.searchOpen ? 'search' : null);
+export const topLayer = () => (app.menuOpen ? 'menu' : app.searchOpen ? 'search' : null);
 
 /**
  * Adds or removes a fruit. Choosing one that isn't in season turns the season switch off,

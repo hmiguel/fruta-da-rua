@@ -43,15 +43,12 @@
 	"about.rules": "In Lisbon it is forbidden to climb or beat public trees (Municipal Tree Regulation, art. 9). Fruits whose collection is restricted by law, like stone-pine cones, are not shown on the map.",
 	"sheet.months": "Harvest months",
 	"sheet.parish": "Parish",
-	"sheet.close": "Close",
 	"locate": "Find my location",
-	"about.title": "About Fruta da Rua",
 	"about.body": "A community map of Lisbon's fruit trees showing what's in season. Seasons are estimates for Lisbon's climate and every tree is different.",
 	"about.etiquette_title": "Etiquette",
 	"about.credit": "Data: Câmara Municipal de Lisboa, Dados Abertos (CC0).",
 	"about.data_date": "Data from {date}",
 	"about.related": "Sister projects",
-	"about.close": "Close",
 	"search.label": "Search for a fruit",
 	"search.clear": "Clear search",
 	"search.results": "{n} fruits",
@@ -77,5 +74,7 @@
 	"nav.skip_content": "Skip to content",
 	"menu.settings": "Settings",
 	"menu.back": "Back to menu",
-	"settings.language": "Language"
+	"settings.language": "Language",
+	"panel.close": "Close",
+	"menu.feedback_hint": "Opens your email app"
 }

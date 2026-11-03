@@ -33,7 +33,7 @@ test('axe: tree sheet, menu, About and search', async ({ page }) => {
 	await noViolations(page, 'menu');
 	await page.getByTestId('settings-open').click();
 	await noViolations(page, 'settings');
-	await page.getByTestId('settings-back').click();
+	await page.getByTestId('panel-back').click();
 	await page.getByTestId('about-open').click();
 	await noViolations(page, 'about');
 	await page.keyboard.press('Escape');
@@ -41,7 +41,7 @@ test('axe: tree sheet, menu, About and search', async ({ page }) => {
 	await noViolations(page, 'search');
 });
 
-test('keyboard: skip link first, menu and About trap focus and return it, Escape closes only the top layer', async ({
+test('keyboard: skip link first, menu traps focus, back returns to the row, Escape closes only the menu', async ({
 	page
 }) => {
 	await page.goto('/?e2e=1');
@@ -51,15 +51,16 @@ test('keyboard: skip link first, menu and About trap focus and return it, Escape
 	await page.evaluate(() => (window as unknown as { __openFirstTree: () => void }).__openFirstTree());
 	await page.getByTestId('menu-open').focus();
 	await page.keyboard.press('Enter');
-	for (let i = 0; i < 8; i++) await page.keyboard.press('Tab');
-	expect(await page.getByTestId('menu').evaluate((d) => d.contains(document.activeElement))).toBe(true);
 	await page.getByTestId('about-open').focus();
 	await page.keyboard.press('Enter');
-	const about = page.getByTestId('about');
-	for (let i = 0; i < 8; i++) await page.keyboard.press('Tab');
-	expect(await about.evaluate((d) => d.contains(document.activeElement))).toBe(true);
+	await expect(page.getByTestId('about')).toBeVisible();
+	await expect(page.getByTestId('panel-back')).toBeFocused();
+	await page.keyboard.press('Enter');
+	await expect(page.getByTestId('about-open')).toBeFocused();
+	for (let i = 0; i < 12; i++) await page.keyboard.press('Tab');
+	expect(await page.getByTestId('menu').evaluate((d) => d.contains(document.activeElement))).toBe(true);
 	await page.keyboard.press('Escape');
-	await expect(about).toHaveCount(0);
+	await expect(page.getByTestId('menu')).toHaveCount(0);
 	await expect(page.getByTestId('tree-sheet')).toBeVisible();
 	await expect(page.getByTestId('menu-open')).toBeFocused();
 });

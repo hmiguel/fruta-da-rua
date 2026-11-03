@@ -22,7 +22,7 @@ test('language is chosen in the menu settings, keeps the filters, and stays', as
 	await page.getByTestId('chip-olive').click();
 	await page.getByTestId('menu-open').click();
 	await page.getByTestId('settings-open').click();
-	await expect(page.getByTestId('settings-back')).toBeFocused();
+	await expect(page.getByTestId('panel-back')).toBeFocused();
 	await expect(page.getByTestId('lang-pt')).toHaveAttribute('aria-current', 'true');
 	await page.getByTestId('lang-en').click();
 	await expect(page).toHaveURL(/\/en\?fruta=olive$/);
@@ -137,7 +137,7 @@ test('menu: feedback by email, Escape closes and gives focus back', async ({ pag
 	await expect(menu).toBeFocused();
 	await expect(menu.getByTestId('feedback')).toHaveAttribute('href', /^mailto:hugo@lixo\.dev\?subject=/);
 	await page.getByTestId('settings-open').click();
-	await page.getByTestId('settings-back').click();
+	await page.getByTestId('panel-back').click();
 	await expect(menu.getByTestId('settings-open')).toBeFocused();
 	await page.keyboard.press('Escape');
 	await expect(menu).toHaveCount(0);
@@ -150,4 +150,23 @@ test('map credits start folded so they do not cover the map', async ({ page }) =
 	const attrib = page.locator('.maplibregl-ctrl-attrib');
 	await expect(attrib).toHaveClass(/maplibregl-compact/);
 	await expect(attrib).not.toHaveClass(/maplibregl-compact-show/);
+});
+
+test('fruit pages have the same menu as the map, with the language in settings', async ({ page }) => {
+	await page.goto('/fruta/figo');
+	await page.getByTestId('menu-open').click();
+	await page.getByTestId('settings-open').click();
+	await page.getByTestId('lang-en').click();
+	await expect(page).toHaveURL(/\/en\/fruit\/fig$/);
+	await page.getByTestId('menu-open').click();
+	await expect(page.getByTestId('menu').getByRole('link', { name: 'Fruit calendar' })).not.toHaveAttribute(
+		'aria-current'
+	);
+	await page.getByTestId('menu').getByRole('link', { name: 'Fruit calendar' }).click();
+	await expect(page).toHaveURL(/\/en\/fruit$/);
+	await page.getByTestId('menu-open').click();
+	await expect(page.getByTestId('menu').getByRole('link', { name: 'Fruit calendar' })).toHaveAttribute(
+		'aria-current',
+		'page'
+	);
 });
