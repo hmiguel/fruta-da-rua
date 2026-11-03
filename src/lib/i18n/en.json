@@ -96,5 +96,6 @@
 	"install.ios_2": "Choose \"Add to Home Screen\". If you can't see it, scroll the list down.",
 	"install.ios_3": "Tap \"Add\".",
 	"install.browser_1": "Open the browser menu, the three dots next to the address.",
-	"install.browser_2": "Choose \"Install app\" or \"Add to home screen\"."
+	"install.browser_2": "Choose \"Install app\" or \"Add to home screen\".",
+	"menu.opens_outside": "opens outside the app"
 }

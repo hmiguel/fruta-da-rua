@@ -265,6 +265,10 @@ test('menu order: map and calendar, etiquette and settings, sponsor and feedback
 	await page.goto('/');
 	await page.getByTestId('menu-open').click();
 	const labels = await page.getByTestId('menu').locator('.row .label').allTextContents();
+	// Rows that leave the app say so with the arrow-out icon; rows that open a screen inside have ›.
+	await expect(page.getByTestId('sponsor-open')).toContainText('abre fora da app');
+	await expect(page.getByTestId('feedback')).toContainText('abre fora da app');
+	await expect(page.getByTestId('settings-open')).not.toContainText('abre fora da app');
 	expect(labels).toEqual([
 		'Mapa',
 		'Calendário da fruta',

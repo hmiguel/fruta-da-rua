@@ -90,10 +90,14 @@
 
 <svelte:window onkeydown={onKey} />
 
-{#snippet inside(icon: IconName, label: string, more: boolean)}
+<!-- `next`: 'sub' opens a screen inside the menu (›), 'out' leaves the app (arrow out of a box). -->
+{#snippet inside(icon: IconName, label: string, next: 'sub' | 'out' | null)}
 	<Icon name={icon} />
 	<span class="label">{label}</span>
-	{#if more}<span class="more"><Icon name="forward" size={18} /></span>{/if}
+	{#if next === 'sub'}<span class="more"><Icon name="forward" size={18} /></span>
+	{:else if next === 'out'}<span class="more"><Icon name="external" size={18} /></span><span class="sr-only"
+			>{t('menu.opens_outside')}</span
+		>{/if}
 {/snippet}
 
 <div
@@ -119,12 +123,12 @@
 			<ul>
 				<li>
 					<a class="row" href={homePath(i18n.lang)} aria-current={here(homePath(i18n.lang))}
-						>{@render inside('map', t('nav.map'), false)}</a
+						>{@render inside('map', t('nav.map'), null)}</a
 					>
 				</li>
 				<li>
 					<button class="row" data-view="calendar" data-testid="calendar-open" onclick={() => show('calendar')}
-						>{@render inside('calendar', t('menu.calendar'), true)}</button
+						>{@render inside('calendar', t('menu.calendar'), 'sub')}</button
 					>
 				</li>
 			</ul>
@@ -132,18 +136,18 @@
 			<ul>
 				<li>
 					<button class="row" data-view="etiquette" data-testid="etiquette-open" onclick={() => show('etiquette')}
-						>{@render inside('leaf', t('menu.etiquette'), true)}</button
+						>{@render inside('leaf', t('menu.etiquette'), 'sub')}</button
 					>
 				</li>
 				<li>
 					<button class="row" data-view="settings" data-testid="settings-open" onclick={() => show('settings')}
-						>{@render inside('settings', t('menu.settings'), true)}</button
+						>{@render inside('settings', t('menu.settings'), 'sub')}</button
 					>
 				</li>
 				{#if how !== 'installed'}
 					<li>
 						<button class="row" data-view="install" data-testid="install-open" onclick={addToHome}
-							>{@render inside('phone', t('menu.install'), how !== 'prompt')}</button
+							>{@render inside('phone', t('menu.install'), how === 'prompt' ? null : 'sub')}</button
 						>
 					</li>
 				{/if}
@@ -152,15 +156,15 @@
 			<ul>
 				<li>
 					<a class="row" href={SPONSOR_URL} target="_blank" rel="noopener" data-testid="sponsor-open"
-						>{@render inside('heart', t('about.sponsor'), false)}</a
+						>{@render inside('heart', t('about.sponsor'), 'out')}</a
 					>
 				</li>
 				<li>
-					<a class="row" href={mail} data-testid="feedback">{@render inside('mail', t('menu.feedback'), false)}</a>
+					<a class="row" href={mail} data-testid="feedback">{@render inside('mail', t('menu.feedback'), 'out')}</a>
 				</li>
 				<li>
 					<button class="row" data-view="about" data-testid="about-open" onclick={() => show('about')}
-						>{@render inside('info', t('menu.about'), true)}</button
+						>{@render inside('info', t('menu.about'), 'sub')}</button
 					>
 				</li>
 			</ul>

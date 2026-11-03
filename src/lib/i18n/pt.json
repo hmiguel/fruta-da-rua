@@ -96,5 +96,6 @@
 	"install.ios_2": "Escolha «Adicionar ao ecrã principal». Se não aparecer, deslize a lista para baixo.",
 	"install.ios_3": "Toque em «Adicionar».",
 	"install.browser_1": "Abra o menu do browser, os três pontos ao lado do endereço.",
-	"install.browser_2": "Escolha «Instalar app» ou «Adicionar ao ecrã principal»."
+	"install.browser_2": "Escolha «Instalar app» ou «Adicionar ao ecrã principal».",
+	"menu.opens_outside": "abre fora da app"
 }
