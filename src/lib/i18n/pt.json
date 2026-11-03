@@ -47,7 +47,7 @@
 	"about.body": "Um mapa comunitário das árvores de fruto de Lisboa que mostra o que está na época. As épocas são estimativas para o clima de Lisboa e cada árvore é diferente.",
 	"about.credit": "Dados: Câmara Municipal de Lisboa, Dados Abertos (CC0).",
 	"about.data_date": "Dados de {date}",
-	"about.related": "Projetos irmãos",
+	"about.related": "Projeto irmão",
 	"search.label": "Procurar fruta",
 	"search.clear": "Limpar pesquisa",
 	"search.results": "{n} frutos",

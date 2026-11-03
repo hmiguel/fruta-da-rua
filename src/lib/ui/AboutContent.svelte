@@ -29,10 +29,7 @@
 	</p>
 
 	<h3>{t('about.related')}</h3>
-	<ul>
-		<li><a href="https://fallingfruit.org" target="_blank" rel="noopener">Falling Fruit</a></li>
-		<li>Muita Fruta (Cozinha Popular da Mouraria)</li>
-	</ul>
+	<p><a class="out" href="https://fallingfruit.org" target="_blank" rel="noopener">Falling Fruit</a></p>
 
 	<h3>{t('about.open_title')}</h3>
 	<p>{t('about.open_body')}</p>
@@ -71,7 +68,8 @@
 		margin: 0;
 		padding-left: 18px;
 	}
-	li a {
+	li a,
+	a.out {
 		display: inline-flex;
 		align-items: center;
 		min-height: 44px;

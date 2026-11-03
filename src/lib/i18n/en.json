@@ -47,7 +47,7 @@
 	"about.body": "A community map of Lisbon's fruit trees showing what's in season. Seasons are estimates for Lisbon's climate and every tree is different.",
 	"about.credit": "Data: Câmara Municipal de Lisboa, Dados Abertos (CC0).",
 	"about.data_date": "Data from {date}",
-	"about.related": "Sister projects",
+	"about.related": "Sister project",
 	"search.label": "Search for a fruit",
 	"search.clear": "Clear search",
 	"search.results": "{n} fruits",

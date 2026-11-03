@@ -23,7 +23,8 @@ test('about dialog credits the data and shows its date', async ({ page }) => {
 	await page.getByTestId('about-open').click();
 	const about = page.getByTestId('about');
 	await expect(about).toContainText('CC0');
-	await expect(about).toContainText(/Muita Fruta/);
+	await expect(about).toContainText('Falling Fruit');
+	await expect(about).not.toContainText('Muita Fruta');
 	await expect(about).toContainText(/\d{4}/);
 	await page.keyboard.press('Escape');
 	await expect(about).toHaveCount(0);
